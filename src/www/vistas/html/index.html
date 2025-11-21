@@ -1,11 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- http://localhost/ProyectoAlejandroMVC/ProyectoDAW2526-Alejandro-Marcos/src/www/index.php -->
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página principal</title>
+    <title>Sistema de Gestión de Agresiones - VioGen</title>
+    <link rel="stylesheet" href="vistas/css/estilos.css">
 </head>
 <body>
-    <h1>Bienvenido a EcoTrack</h1>
+    <header>
+        <div class="container">
+            <h1>Alejandro MVC</h1>
+            <form action="controladores/controladorlogout.php" method="post" style="display:inline">
+                <button type="submit" class="btn-cerrar-sesion">Cerrar sesión</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="menu-principal">
+
+            <!-- Buscador de Agresiones -->
+            <div class="buscador-agresiones">
+                <h3>Informe de Agresiones</h3>
+                <form action="index.php" method="get" class="form-buscador">
+                    <input type="hidden" name="controlador" value="ControladorAgresiones">
+                    <input type="hidden" name="metodo" value="buscarAgresiones">
+                    <input type="text" name="busqueda" placeholder="Buscar por DNI de víctima, fecha, tipo..." required class="input-busqueda">
+                    <button type="submit" class="btn btn-buscar">Buscar</button>
+                </form>
+            </div>
+
+            <!-- Registro de Víctima -->
+            <div class="casos-uso">
+                <div class="caso-uso-card">
+                    <h3>Registrar Víctima</h3>
+                    <p>Registrar una nueva víctima en el sistema</p>
+                    <form action="index.php" method="get">
+                        <input type="hidden" name="controlador" value="ControladorVictima">
+                        <input type="hidden" name="metodo" value="verFormularioRegistro">
+                        <button type="submit" class="btn btn-primary">Registrar Víctima</button>
+                    </form>
+                </div>
+
+
+            <!-- Registro de Agresion -->
+                <div class="caso-uso-card">
+                    <h3>Registrar Agresión</h3>
+                    <p>Registrar una nueva agresión en el sistema</p>
+                    <form action="index.php" method="get">
+                        <input type="hidden" name="controlador" value="ControladorAgresiones">
+                        <input type="hidden" name="metodo" value="verFormularioAgresion">
+                        <button type="submit" class="btn btn-accent">Registrar Agresión</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+        </div>
+    </footer>
 </body>
 </html>

@@ -19,8 +19,8 @@
         // Método que renderiza el formulario de inicio de sesión
         public function mostrariniciosesion(){
             // Cargo el archivo HTML del formulario de login
-            // Uso la ruta configurada más el nombre del archivo
-            require_once($this->config['dir_html'].'sesion.html');
+            // Uso una ruta fija relativa al directorio de esta vista
+            require_once(__DIR__ . '/html/sesion.html');
             // Detengo la ejecución para que solo se muestre esta vista
             die();
         }

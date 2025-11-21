@@ -7,8 +7,8 @@ return [
     'dir_html' => 'vistas/html/',
     'dir_modelos' => 'modelos/',
     'bd_host' => 'localhost',
-    'bd_nombre' => 'ecotrack',
-    'bd_usuario' => 'admin',
-    'bd_clave' => 'admin'
+    'bd_nombre' => 'viogen',
+    'bd_usuario' => 'uviogeo',
+    'bd_clave' => 'cviogen'
 ];
 ?>

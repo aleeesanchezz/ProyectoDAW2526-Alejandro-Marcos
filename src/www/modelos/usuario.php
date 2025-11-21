@@ -4,19 +4,13 @@ require_once('./servicios/bd.php');
 class Usuario {
     private $id;
     private $nombre;
-    private $nombreUsuario;
     private $contraseña;
-    private $telefono;
-    private $email;
     private $base_datos;
 
-    public function __construct(string $nombre, string $nombreUsuario, string $contraseña, string $telefono, string $email) {
+    public function __construct(string $nombre, string $contraseña) {
         $this->id = null;
         $this->nombre = $nombre;
-        $this->nombreUsuario = $nombreUsuario;
         $this->contraseña = $contraseña;
-        $this->telefono = $telefono;
-        $this->email = $email;
         $this->base_datos = new BD();
     }
 
@@ -33,48 +27,32 @@ class Usuario {
     }
 
     public function getNombreUsuario(): string {
-        return $this->nombreUsuario;
+        return $this->nombre;
     }
 
-    public function guardar() {
-        try {
-            // Hashear la contraseña antes de guardar
-            $contraseñaHash = password_hash($this->contraseña, PASSWORD_DEFAULT);
+    // public function guardar() {
+    //     try {
+    //         // Hashear la contraseña antes de guardar
+    //         $contraseñaHash = password_hash($this->contraseña, PASSWORD_DEFAULT);
             
-            $sql = "INSERT INTO usuario (nombre, nombre_usuario, contraseña, telefono, email) 
-                    VALUES (?, ?, ?, ?, ?)";
-            
-            $parametros = [
-                $this->nombre, 
-                $this->nombreUsuario, 
-                $contraseñaHash, 
-                $this->telefono, 
-                $this->email
-            ];
-            
-            $this->id = $this->base_datos->insertar($sql, $parametros);
-            return $this->id;
-            
-        } catch(Throwable $exception) {
-            header('HTTP/2 500 Internal Server Error');
-            echo "Error en modelos/usuario.php: " . $exception;
-            die();
-        }
-    }
+    //             $sql = "INSERT INTO usuario (nombre,clave) 
+    //                 VALUES (?, ?)";
 
-    public function existeUsuarioOCorreo(): array {
-        $sql = "SELECT COUNT(*) as total, 
-                    SUM(nombre_usuario = ?) as usuario_existente, 
-                    SUM(email = ?) as email_existente 
-                FROM usuario";
-        $parametros = [$this->nombreUsuario, $this->email];
-        $resultado = $this->base_datos->seleccionar($sql, $parametros);
-        
-        return [
-            'usuario' => $resultado[0]['usuario_existente'] > 0,
-            'email' => $resultado[0]['email_existente'] > 0
-        ];
-    }
+    //         $parametros = [
+    //             $this->nombre, 
+    //             $contraseñaHash
+    //         ];
+            
+    //         $this->id = $this->base_datos->insertar($sql, $parametros);
+    //         return $this->id;
+            
+    //     } catch(Throwable $exception) {
+    //         header('HTTP/2 500 Internal Server Error');
+    //         echo "Error en modelos/usuario.php: " . $exception;
+    //         die();
+    //     }
+    // }
+
 
     /**
      * Método estático para validar login
@@ -82,16 +60,16 @@ class Usuario {
      * @param string $contraseña
      * @return array|false Retorna los datos del usuario si es válido, false si no
      */
-    public static function validarLogin(string $nombreUsuario, string $contraseña) {
+    public static function validarLogin(string $nombre, string $contraseña) {
         try {
             $base_datos = new BD();
             
-            // Buscar el usuario por nombre de usuario
-            $sql = "SELECT id, nombre, nombre_usuario, contraseña, telefono, email 
+            // Buscar el usuario por nombre 
+                $sql = "SELECT id, nombre, clave 
                     FROM usuario 
-                    WHERE nombre_usuario = ?";
+                    WHERE nombre = ?";
             
-            $parametros = [$nombreUsuario];
+            $parametros = [$nombre];
             $resultado = $base_datos->seleccionar($sql, $parametros);
             
             // Si no existe el usuario
@@ -101,18 +79,24 @@ class Usuario {
             
             $datosUsuario = $resultado[0];
             
-            // Verificar la contraseña
-            if (password_verify($contraseña, $datosUsuario['contraseña'])) {
+            // Verificar la contraseña (hash moderno)
+            if (password_verify($contraseña, $datosUsuario['clave'])) {
                 // Login exitoso - retornar datos sin la contraseña
                 return [
                     'id' => $datosUsuario['id'],
-                    'nombre' => $datosUsuario['nombre'],
-                    'nombreUsuario' => $datosUsuario['nombre_usuario'],
-                    'telefono' => $datosUsuario['telefono'],
-                    'email' => $datosUsuario['email']
+                    'nombre' => $datosUsuario['nombre']
                 ];
             }
-            
+
+            // Fallback: si la BD contiene una contraseña en texto plano (migración)
+            // se acepta la coincidencia exacta, pero se recomienda rehacer el hashing
+            if ($datosUsuario['clave'] === $contraseña) {
+                return [
+                    'id' => $datosUsuario['id'],
+                    'nombre' => $datosUsuario['nombre']
+                ];
+            }
+
             // Contraseña incorrecta
             return false;
             
