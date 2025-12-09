@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta</title>
+    <link rel="stylesheet" href="/www/css/styles.css">
+</head>
+<body id="bodyRegistro">
+
+    <?php if(!empty($this->getMensaje())): ?>
+        <div class="error" style="color:red; margin-bottom: 10px;">
+            <?= htmlspecialchars($this->getMensaje()) ?>
+        </div>
+    <?php endif; ?>
+
+    <main class="mainISesion">
+        <h1>SIGN UP</h1>
+        <form action="index.php?controlador=ControladorLogin&metodo=alta" id="datosCuenta" method="POST">
+            <input type="text" name="nombre" class="login" id="nombre" placeholder="Nombre Completo">
+            <input type="text" name="nombreUsuario" class="login" id="nombreUsuario" placeholder="Nombre de usuario">
+            <input type="password" name="contraseña" class="login" id="contraseña" placeholder="Contraseña">
+            <input type="tel" name="telefono" class="login" id="telefono" placeholder="Número de teléfono">
+            <input type="email" name="email" class="login" id="email" placeholder="Correo electrónico">
+           
+            <div class="botonesLogin">
+                <button type="submit" id="registrar" class="boton">Aceptar</button>
+                <button type="button" id="f" class="boton">Limpiar</button>
+            </div>
+        </form>
+    </main>
+    <div class="crearCuenta">
+        <p>¿Ya tienes una cuenta?</p><p><a href="index.php?controlador=ControladorLogin&metodo=verInicioSesion">Inicia sesión</a></p>
+    </div>
+</body>
+</html>

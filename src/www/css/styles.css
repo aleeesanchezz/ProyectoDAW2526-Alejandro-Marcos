@@ -1,0 +1,177 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    min-height: 100vh;
+}
+
+.bodySesion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    background: linear-gradient(135deg, #d8dae2 0%, #ffffff 100%);
+    height: 100vh;
+    width: 100%;
+}
+
+#bodyRegistro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    background: linear-gradient(135deg, #d8dae2 0%, #ffffff 100%);
+    height: 100vh;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.mainISesion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    flex-direction: column;
+    background-color: white;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    gap: 0;
+    padding: 2.5rem 2rem;
+    position: relative;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#datosCuenta,
+#datosLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+#datosLogin p {
+    margin: 0;
+    margin-bottom: -0.7rem;
+    font-size: 14px;
+    color: #666;
+    font-weight: normal;
+}
+
+.login {
+    padding: 12px 15px;
+    width: 100%;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login:focus {
+    border: 2px solid #667eea;
+    outline: none;
+    border: 1px solid #28a745;
+}
+
+.login::placeholder {
+    color: #aaa;
+}
+
+.botonesLogin {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.boton {
+    width: 100%;
+    height: 50px;
+    background-color: #28a745;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+
+.boton:hover {
+    background-color: #218838;
+}
+
+#datosCuenta .boton:nth-child(2),
+.botonesLogin .boton:nth-child(2) {
+    background-color: #6c757d;
+}
+
+#datosCuenta .boton:nth-child(2):hover,
+.botonesLogin .boton:nth-child(2):hover {
+    background-color: #5a6268;
+}
+
+.crearCuenta {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-top: 1rem;
+    font-size: 13px;
+    color: #666;
+}
+
+.crearCuenta p {
+    margin: 0;
+}
+
+.crearCuenta p:first-child {
+    color: #666;
+}
+
+.crearCuenta a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.crearCuenta a:hover {
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: #667eea;
+}
+
+.infoGenerada{
+    position:absolute;
+    right: 0;
+    top: 0;
+    margin: 2rem;
+    background-color: rgb(53, 165, 53);
+    padding: 1rem;
+    color: white;
+    border-radius: 5;
+    box-shadow: 0 5px 5px #969292;
+}

@@ -13,8 +13,11 @@
 
         // Método que muestra la página principal (index.html)
         public function verIndex(){
-            // Incluyo el archivo HTML de forma robusta usando __DIR__
-            require_once(__DIR__ . '/html/index.html');
+            // Incluyo el archivo HTML usando la ruta definida en la configuración
+            // require_once evita que se incluya el mismo archivo varias veces
+            require_once($this->config['dir_html']).'index.html';
+            // die() detiene la ejecución del script después de mostrar la vista
+            // Esto previene que se ejecute código adicional no deseado
             die();
         }
 

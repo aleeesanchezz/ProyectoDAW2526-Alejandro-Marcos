@@ -7,7 +7,7 @@
  * qué controlador y método se deben ejecutar según los parámetros
  * que vengan por la URL.
  */
-// http://localhost/ProyectoAlejandroMVCViogen/ProyectoDAW2526-Alejandro-Marcos/src/www/index.php
+
 try {
     // Cargo el archivo de configuración donde están las rutas y ajustes
     $config = require_once('./config.php');
@@ -25,9 +25,8 @@ try {
 
     // Aquí miro qué controlador y qué método quiere usar el usuario
     // Si no pone nada en la URL, uso valores por defecto
-    // Usar ControladorLogin por defecto y mostrar la vista de inicio de sesión
-    $controlador = $_GET['controlador'] ?? 'ControladorLogin';
-    $metodo = $_GET['metodo'] ?? 'verInicioSesion';
+    $controlador = $_GET['controlador'] ?? 'Controlador1';
+    $metodo = $_GET['metodo'] ?? 'metodo1';
 
     // Carga del archivo del controlador que se pidió
     require_once($config['dir_controladores'] . strtolower($controlador) . '.php');
@@ -36,7 +35,7 @@ try {
     // aunque arriba se lee un nombre desde GET, pero creo que aún no está implementado.
     $controlador = new ControladorLogin($config);
 
-    // Ejecuto el método que pidió el usuario (por ejemplo verInicioSesion o crearSesion)
+    // Ejecuto el método que pidió el usuario (por ejemplo verRegistro o crearSesion)
     $controlador->$metodo();
     die();
 
