@@ -37,7 +37,7 @@ Estas son las funcionalidades más importantes que tenemos que hacer sí o sí p
 
 ---
 
-### HU-01 · Registro de usuario
+### HU-01 · Registro de usuario HECHO
 
 **Como** visitante de la web,  
 **Quiero** crear una cuenta en EcoTrack,  
@@ -59,7 +59,7 @@ Estas son las funcionalidades más importantes que tenemos que hacer sí o sí p
 
 ---
 
-### HU-02 · Inicio de sesión
+### HU-02 · Inicio de sesión HECHO
 
 **Como** usuario registrado,  
 **Quiero** poder iniciar sesión con mi nombre de usuario y contraseña,  
@@ -81,7 +81,7 @@ Estas son las funcionalidades más importantes que tenemos que hacer sí o sí p
 
 ---
 
-### HU-03 · Dashboard principal
+### HU-03 · Dashboard principal PENDIENTE
 
 **Como** usuario autenticado,  
 **Quiero** ver un resumen visual de mi consumo,  
@@ -102,7 +102,7 @@ Estas son las funcionalidades más importantes que tenemos que hacer sí o sí p
 
 ---
 
-### HU-04 · Registrar un consumo
+### HU-04 · Registrar un consumo HECHO
 
 **Como** usuario,  
 **Quiero** registrar mis consumos de agua, luz o gas,  
@@ -125,7 +125,7 @@ Estas son las funcionalidades más importantes que tenemos que hacer sí o sí p
 
 ---
 
-### HU-05 · Ver historial de consumos
+### HU-05 · Ver historial de consumos HECHO
 
 **Como** usuario,  
 **Quiero** ver un listado de todos mis consumos anteriores,  
@@ -147,7 +147,7 @@ Estas son las funcionalidades más importantes que tenemos que hacer sí o sí p
 
 ---
 
-### HU-06 · Recuperar contraseña
+### HU-06 · Recuperar contraseña HECHO
 
 **Como** usuario que ha olvidado su contraseña,  
 **Quiero** poder recuperar el acceso a mi cuenta,  
@@ -175,7 +175,7 @@ Estas funcionalidades son importantes pero no críticas. Las haremos después de
 
 ---
 
-### HU-07 · Crear objetivos de reducción
+### HU-07 · Crear objetivos de reducción PENDIENTE
 
 **Como** usuario consciente del medio ambiente,  
 **Quiero** establecer objetivos de reducción de CO₂,  
@@ -196,7 +196,7 @@ Estas funcionalidades son importantes pero no críticas. Las haremos después de
 
 ---
 
-### HU-08 · Ver progreso de objetivos
+### HU-08 · Ver progreso de objetivos PENDIENTE
 
 **Como** usuario con objetivos activos,  
 **Quiero** ver mi progreso en tiempo real,  
@@ -217,7 +217,7 @@ Estas funcionalidades son importantes pero no críticas. Las haremos después de
 
 ---
 
-### HU-09 · Exportar datos a CSV
+### HU-09 · Exportar datos a CSV PENDIENTE
 
 **Como** usuario que quiere analizar sus datos externamente,  
 **Quiero** descargar mis consumos en formato CSV,  
@@ -238,7 +238,7 @@ Estas funcionalidades son importantes pero no críticas. Las haremos después de
 
 ---
 
-### HU-10 · Generar informe PDF
+### HU-10 · Generar informe PDF PENDIENTE
 
 **Como** usuario que necesita documentación formal,  
 **Quiero** generar un informe en PDF de mis consumos,  
@@ -258,7 +258,7 @@ Estas funcionalidades son importantes pero no críticas. Las haremos después de
 
 ---
 
-### HU-11 · Editar perfil de usuario
+### HU-11 · Editar perfil de usuario HECHO
 
 **Como** usuario,  
 **Quiero** actualizar mis datos personales,  
@@ -285,7 +285,7 @@ Estas son funcionalidades "nice to have" que haríamos si nos sobra tiempo o en 
 
 ---
 
-### HU-12 · Comparación con promedio nacional
+### HU-12 · Comparación con promedio nacional PENDIENTE
 
 **Como** usuario curioso,  
 **Quiero** comparar mi consumo con el promedio de otros usuarios,  
@@ -299,7 +299,7 @@ Estas son funcionalidades "nice to have" que haríamos si nos sobra tiempo o en 
 
 ---
 
-### HU-13 · Notificaciones por email
+### HU-13 · Notificaciones por email PENDIENTE
 
 **Como** usuario comprometido,  
 **Quiero** recibir notificaciones periódicas,  
@@ -313,7 +313,7 @@ Estas son funcionalidades "nice to have" que haríamos si nos sobra tiempo o en 
 
 ---
 
-### HU-14 · Eliminar cuenta
+### HU-14 · Eliminar cuenta HECHO
 
 **Como** usuario que ya no quiere usar la aplicación,  
 **Quiero** borrar mi cuenta permanentemente,  
