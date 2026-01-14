@@ -1,0 +1,18 @@
+
+<p *ngIf="!usuarioActual">
+  Inicia sesion anda
+</p>
+
+<body *ngIf="usuarioActual">
+  <app-navbar></app-navbar>
+
+  <main>
+    <h5>Consumos registrados: <span style="color: rgb(32, 141, 32);">{{this.numeroDeConsumos}}</span></h5>
+    <button type="button" class="btn btn-success">Crear objetivo de reducción</button>
+  </main>
+
+  <app-footer></app-footer>
+  
+
+</body>
+
