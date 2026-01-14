@@ -1,0 +1,60 @@
+#login{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    font-family: sans-serif;
+    gap: 2rem;
+}
+
+h2{
+    font-weight: bold;
+    color: rgb(64, 124, 80);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: rgb(238, 237, 247);
+    border-radius: 7px;
+    padding: 2rem;
+    box-shadow: 2px 5px 15px rgb(156, 156, 156);
+}
+
+
+
+#iniciarSesion{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form-control:focus {
+  border-color: #86fea0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 253, 93, 0.25);
+}
+
+span{
+    margin-top: 0.5rem;
+    font-size: 15px;
+}
+
+input{
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 600px) {
+    form{
+        width: 300px;
+    }
+}
+
+button{
+    font-weight: bold;
+    border-radius: 3px;
+    
+}
+
+#iniciarSesion{
+    margin-bottom: 0.5rem;
+}

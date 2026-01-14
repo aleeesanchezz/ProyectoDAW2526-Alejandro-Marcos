@@ -1,0 +1,15 @@
+main{
+  display: flex;
+  flex-direction: column;
+  margin: 3rem;
+  margin-left: 5rem;
+}
+
+.btn{
+  width: 250px;
+  margin-top: 0.5rem;
+}
+
+body{
+  margin: 0 ;
+}
