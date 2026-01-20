@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { ModificarConsumoComponent } from './components/modificar-consumo/modifi
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ObjetivoReduccionComponent } from './components/objetivo-reduccion/objetivo-reduccion.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path: 'menu-usuario', component: MenuUsuarioComponent},
   {path: 'ayuda-password', component: AyudaPasswordComponent},
   {path: 'reiniciar-password', component: ReiniciarPasswordComponent},
-  {path: 'modificar-consumo', component: ModificarConsumoComponent}
+  {path: 'modificar-consumo', component: ModificarConsumoComponent},
+  {path: 'verificar-codigo', component: VerificarCodigoComponent} 
 
 ]
 
@@ -49,6 +51,7 @@ const routes: Routes = [
     NavbarComponent,
     ObjetivoReduccionComponent,
     FooterComponent,
+    VerificarCodigoComponent,
   ],
   imports: [
     BrowserModule,

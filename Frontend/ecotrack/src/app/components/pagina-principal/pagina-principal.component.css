@@ -3,6 +3,7 @@ main{
   flex-direction: column;
   margin: 3rem;
   margin-left: 5rem;
+  
 }
 
 .btn{
@@ -12,4 +13,6 @@ main{
 
 body{
   margin: 0 ;
+  background-color: rgb(240, 243, 255);
+  height: 100vh;
 }

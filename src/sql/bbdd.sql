@@ -6,8 +6,6 @@
 
 -- Crear la base de datos
 CREATE DATABASE IF NOT EXISTS EcoTrack
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
 
 -- Usar la base de datos
 USE EcoTrack;
@@ -25,9 +23,8 @@ CREATE TABLE IF NOT EXISTS usuario (
     nombre VARCHAR(100) NOT NULL,
     nombre_usuario VARCHAR(50) NOT NULL,
     contraseña VARCHAR(255) NOT NULL,
-    telefono VARCHAR(20),
     email VARCHAR(100) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (nombre_usuario),
     UNIQUE (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) 

@@ -32,9 +32,11 @@ export class RegistrarUsuarioComponent implements OnInit{
   registrarUsuario(){
 
     let usuario = new Usuario(this.id, this.nombre, this.apellidos, this.nombreUsuario, this.password, this.email);
-    this.usuarioService.registrarUsuario(usuario).subscribe({
+    
+    this.usuarioService.verificarEmail(usuario).subscribe({
       next: (res) => { // Si va bien
-        this.mensaje = 'Usuario registrado correctamente';
+        const usuarioParaRegistrar = localStorage.setItem('usuarioParaRegistrar', JSON.stringify(usuario));
+        this.mensaje = 'Le hemos enviado un codigode verificación a su correo, por favor, revíselo';
         this.error = '';
       },
       error: (err) => { // Si va mal

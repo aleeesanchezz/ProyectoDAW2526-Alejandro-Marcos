@@ -1,0 +1,22 @@
+<div class="container" id="login">
+    <h2>Verificar código</h2>
+    <form (ngSubmit)="verificarCodigo()" #form="ngForm">
+        <div class="mb-3">
+            <input [(ngModel)]="codigo" type="number" placeholder="Código" class="form-control" id="codigo" name="codigo" required #cod="ngModel">
+            <div style="color: red;" [hidden]="cod.valid || cod.untouched">
+                Este campo es obligatorio
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-success" id="reiniciarContraseña" [disabled]="form.invalid" >Verificar código</button>
+        
+    </form>
+    <a routerLink=''>Iniciar sesión</a>
+    <div *ngIf="error" class="alert alert-danger mt-3">
+        {{error}}
+    </div>
+    <div *ngIf="mensaje" class="alert alert-success mt-3">
+        {{mensaje}}
+    </div>
+</div>
