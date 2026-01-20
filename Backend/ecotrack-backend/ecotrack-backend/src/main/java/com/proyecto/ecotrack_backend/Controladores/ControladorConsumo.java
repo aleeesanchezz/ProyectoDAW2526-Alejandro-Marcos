@@ -30,6 +30,7 @@ public class ControladorConsumo {
 
     @DeleteMapping("{id}")
     public void eliminarConsumo(@PathVariable Integer id){
+
         consumoServicio.eliminarConsumoPorId(id);
     }
 

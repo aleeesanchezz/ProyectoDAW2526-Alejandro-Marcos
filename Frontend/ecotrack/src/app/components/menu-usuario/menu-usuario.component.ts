@@ -13,6 +13,8 @@ export class MenuUsuarioComponent implements OnInit{
 
   constructor(private authService: AuthServiceService, private usuarioService: UsuarioService, private router: Router){}
 
+    usuarioActual = this.authService.getUsuario();
+
   ngOnInit(): void {
      if (this.usuarioActual) {
       this.nombre = this.usuarioActual.nombre;
@@ -24,7 +26,7 @@ export class MenuUsuarioComponent implements OnInit{
     }
   }
 
-  usuarioActual = this.authService.getUsuario();
+
 
 
   nombre: string = '';
@@ -87,6 +89,11 @@ export class MenuUsuarioComponent implements OnInit{
   eliminarUsuario(){
 
     const idUsuario = this.usuarioActual?.id;
+
+    if (!idUsuario) {
+      this.error = 'No se encontró el ID del usuario';
+      return;
+    }
 
     this.usuarioService.eliminarUsuario(idUsuario).subscribe({
       next: (res) => {

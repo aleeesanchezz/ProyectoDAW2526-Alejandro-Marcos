@@ -1,9 +1,12 @@
 package com.proyecto.ecotrack_backend.Controladores;
 
 import com.proyecto.ecotrack_backend.dto.ReiniciarPasswordDto;
+import com.proyecto.ecotrack_backend.excepciones.EmailExistenteException;
+import com.proyecto.ecotrack_backend.excepciones.NombreUsuarioExistenteException;
 import com.proyecto.ecotrack_backend.modelos.PasswordResetToken;
 import com.proyecto.ecotrack_backend.modelos.Usuario;
 import com.proyecto.ecotrack_backend.repositorio.PasswordResetTokenRepository;
+import com.proyecto.ecotrack_backend.repositorio.UsuarioRepositorio;
 import com.proyecto.ecotrack_backend.servicio.EmailService;
 import com.proyecto.ecotrack_backend.servicio.UsuarioServicio;
 import org.springframework.http.HttpStatus;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController //Exponer servicios
 @RequestMapping("/api/usuarios") //Identificacion de la API
@@ -24,13 +29,17 @@ public class ControladorUsuario {
     private final EmailService emailServicio;
     private final PasswordResetTokenRepository tokenRepository;
     private final PasswordEncoder codificarPassword;
+    private final UsuarioRepositorio usuarioRepo;
 
-    public ControladorUsuario(UsuarioServicio usuarioServicio, EmailService emailServicio, PasswordResetTokenRepository tokenRepository, PasswordEncoder codificarPassword) {
+    private static int codigoVerificacion;
+
+    public ControladorUsuario(UsuarioServicio usuarioServicio, EmailService emailServicio, PasswordResetTokenRepository tokenRepository, PasswordEncoder codificarPassword, UsuarioRepositorio usuarioRepo) {
 
         this.usuarioServicio = usuarioServicio;
         this.emailServicio = emailServicio;
         this.tokenRepository = tokenRepository;
         this.codificarPassword = codificarPassword;
+        this.usuarioRepo = usuarioRepo;
     }
 
     //http://localhost/api/usuarios
@@ -56,8 +65,7 @@ public class ControladorUsuario {
 
     //http://localhost/api/usuarios/id
     @DeleteMapping("{id}")
-    public void eliminarUsuario(@PathVariable int id){
-
+    public void eliminarUsuario(@PathVariable Integer id){
         usuarioServicio.eliminarUsuarioPorId(id);
     }
 
@@ -80,6 +88,45 @@ public class ControladorUsuario {
             return ResponseEntity.ok(usuarioLogueado);
         } else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o contraseña incorrectos");
+        }
+    }
+
+    @PostMapping("/verificar-email")
+    public ResponseEntity<?> mandarCodigoVerificacion(@RequestBody Usuario usuario){
+
+        if(usuarioRepo.existsByNombreUsuario(usuario.getNombreUsuario())){
+            throw new NombreUsuarioExistenteException();
+        }
+
+        if(usuarioRepo.existsByEmail(usuario.getEmail())){
+            throw new EmailExistenteException();
+        }
+
+        // Crea el codigo aleatorio de 5 digitos
+        int codigo = ThreadLocalRandom.current().nextInt(10000, 100000);
+
+        String enlace = "http://localhost:4200/verificar-codigo";
+
+        emailServicio.enviarCorreo(usuario.getEmail(), "Codigo de verificación EcoTrack", "Este es su código de verificación para iniciar" + "\n" +
+                "sesión en Ecotrack: " + codigo + ", por favor, acceda al siguiente enlace para continuar con el registro " + enlace);
+
+        codigoVerificacion = codigo;
+
+        return ResponseEntity.ok("Correo enviado");
+
+    }
+
+    @PostMapping("/comprobar-codigo")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<?> comprobarCodigo(@RequestBody Map<String, Integer> payload){
+
+        Integer codigo = payload.get("codigo");
+
+
+        if(codigo == codigoVerificacion){
+            return ResponseEntity.ok("Verificación correcta");
+        } else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo incorrecto");
         }
     }
 
@@ -110,8 +157,7 @@ public class ControladorUsuario {
         // Enlace que llevara al reseteo de contraseña
         String enlace = "http://localhost:4200/reiniciar-password?token=" + token;
 
-        emailServicio.enviarCorreo(usuario.getEmail(), "Recuperar contraseña",
-                "Pulse aquí para recuperar tu contraseña:\n" + enlace);
+        emailServicio.enviarCorreo(usuario.getEmail(), "Recuperar contraseña", "Pulse aquí para recuperar tu contraseña:\n" + enlace);
 
         return ResponseEntity.ok("Correo enviado");
 

@@ -7,11 +7,11 @@
 
 
 <main id="body">
+    <h2>Historial de consumos</h2>
     <div *ngIf="consumos.length === 0" id="alerta">
         <span>¡Todavia no tienes cosumos registrados!</span>
         <button type="button" class="btn btn-success rounded-circle" id="añadirTarea" (click)="registrarConsumo()">+ </button>
     </div>
-    <h2>Historial de consumos</h2>
     <table *ngIf="consumos.length >= 1" class="table">
         <thead>
             <tr>

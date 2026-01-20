@@ -1,15 +1,47 @@
+main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    background-color: rgb(240, 243, 255);
+}
+
+#Ecotrack{
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(0, 61, 56);
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 90%;
+}
+
+#Ecotrack span{
+    font-weight: bold;
+    color: rgb(39, 190, 72);
+    font-size: 2.5rem;
+}
+
+
+
 #login{
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     margin-top: 1rem;
     font-family: sans-serif;
     gap: 2rem;
 }
 
-h2{
+h1{
     font-weight: bold;
-    color: rgb(64, 124, 80);
+    color: white;
+    margin-top: 3rem;
+    position: absolute;
+    top: 0;
+    font-size: 5rem;
 }
 
 form{
@@ -43,9 +75,32 @@ input{
     border-radius: 3px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
     form{
         width: 300px;
+    }
+
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #Ecotrack{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 35%;
+    }
+
+    h1{
+        margin-top: 0;
+        font-size: 2rem;
+        position: relative;
+    }
+
+    #Ecotrack span{
+        font-size: 15px;
     }
 }
 

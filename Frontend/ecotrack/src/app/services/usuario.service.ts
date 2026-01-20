@@ -18,6 +18,16 @@ export class UsuarioService {
     return this.http.post<Usuario>(this.api, usuario);
   }
 
+  //Metodo que lanza una peticion POST para verificar el email
+  verificarEmail(usuario: Usuario):Observable<string>{
+    return this.http.post<string>(this.api + '/verificar-email', usuario, {responseType: 'text' as 'json'});
+  }
+
+  //Metodo que lanza una peticion POSt para comprobar si el codigo coincide
+  comprobarCodigo(codigo: number):Observable<string>{
+    return this.http.post<string>(this.api + '/comprobar-codigo', {codigo}, {responseType: 'text' as 'json'});
+  }
+
   //Metodo que lanza una peticion POST con el email y contraseña del usuario para validar el login
   validarLogin(email: string, password: string):Observable<Usuario>{
     const body = {
@@ -33,8 +43,8 @@ export class UsuarioService {
   }
 
   //Metodo que lanza una peticion DELETE para eliminar un usuario
-  eliminarUsuario(id: any):Observable<Usuario>{
-    return this.http.delete<Usuario>(this.api + "/" + id);
+  eliminarUsuario(id: any):Observable<any>{
+    return this.http.delete(this.api+'/'+id);
   }
 
   //Metodo que lanza una peticion POST para ver si el email existe

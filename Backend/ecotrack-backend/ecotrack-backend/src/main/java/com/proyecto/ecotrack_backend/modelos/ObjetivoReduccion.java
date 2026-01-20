@@ -16,7 +16,7 @@ public class ObjetivoReduccion {
     @JoinColumn(
             name = "id_usuario",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_consumo_usuario")
+            foreignKey = @ForeignKey(name = "fk_objetivo_usuario")
     )
     private Usuario usuario;
 

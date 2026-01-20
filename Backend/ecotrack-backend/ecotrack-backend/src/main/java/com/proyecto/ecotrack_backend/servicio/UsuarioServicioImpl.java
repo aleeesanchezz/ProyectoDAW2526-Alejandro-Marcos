@@ -53,6 +53,7 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     @Override
     public void eliminarUsuarioPorId(int id) {
+        passwordResetTokenRepository.deleteByUsuarioId(id);
         usuarioRepo.deleteById(id);
     }
 
