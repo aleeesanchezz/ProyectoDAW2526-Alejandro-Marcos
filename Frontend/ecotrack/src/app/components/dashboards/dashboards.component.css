@@ -9,5 +9,6 @@ div{
     0 18px 40px rgba(0, 0, 0, 0.08);
   height: 420px;
   background-color: white;
+  width: 800px;
   border-radius: 20px;
 }
