@@ -1,7 +1,6 @@
-import { OnInit } from "@angular/core";
 import { Categoria } from "./categoria";
 import { Unidad } from "./unidad";
-import { Usuario } from "./usuario";
+
 
 export class Consumo{
 

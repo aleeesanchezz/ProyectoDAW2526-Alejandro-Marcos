@@ -1,0 +1,13 @@
+div{
+  display: flex;
+  flex-direction: column;
+  margin: 3rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.10),
+    0 18px 40px rgba(0, 0, 0, 0.08);
+  height: 420px;
+  background-color: white;
+  border-radius: 20px;
+}

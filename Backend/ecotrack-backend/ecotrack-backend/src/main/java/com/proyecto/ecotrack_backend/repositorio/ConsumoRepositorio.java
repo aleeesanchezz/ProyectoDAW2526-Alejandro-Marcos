@@ -1,6 +1,7 @@
 package com.proyecto.ecotrack_backend.repositorio;
 
 import com.proyecto.ecotrack_backend.modelos.Consumo;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +17,9 @@ public interface ConsumoRepositorio extends JpaRepository<Consumo, Integer> {
      * @return una lista con todos los consumos registrados por el usuario
      */
     List<Consumo> findByUsuarioId(Integer id);
+
+    @Transactional
+    void deleteByUsuarioId(Integer usuarioId);
 
 
     //Obtiene la suma de todo el co2 generado en un mes por el usuario

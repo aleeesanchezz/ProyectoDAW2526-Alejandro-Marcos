@@ -1,16 +1,49 @@
-
-
 <body *ngIf="usuarioActual">
   <app-navbar></app-navbar>
 
-  <main>
-    <h5>Consumos registrados: <span style="color: rgb(32, 141, 32);">{{this.numeroDeConsumos}}</span></h5>
-    <h5>Total Co2 generado este mes: <span style="color: rgb(32, 141, 32);">{{totalCo2GeneradoEsteMesRedondeado}}</span></h5>
-    <button type="button" class="btn btn-success">Crear objetivo de reducción</button>
-  </main>
+  <div class="container-main">
+    <!-- Hero Section con Estadísticas -->
+    <section class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-icon consumos-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-content">
+          <h6 class="stat-label">Consumos Registrados</h6>
+          <p class="stat-value">{{ numeroDeConsumos }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon co2-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <div class="stat-content">
+          <h6 class="stat-label">Total CO₂ Este Mes</h6>
+          <p class="stat-value">{{ totalCo2GeneradoEsteMesRedondeado }} kg</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acciones Rápidas -->
+ 
+
+    <!-- Gráficos y Dashboard -->
+    <section class="dashboard-section">
+      <h3 class="section-title">Tu Panel de Control</h3>
+    </section>
+    <app-dashboards></app-dashboards>
+  </div>
+
+  <div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+        Objetivos de reducción
+    </a>
+    <ul class="dropdown-menu">
+        <li><button class="dropdown-item" routerLink="/registrar-objetivo">Crear nuevo objetivo de reducción</button></li>
+        <li><button class="dropdown-item">Mis objetivos</button></li>
+    </ul>
+  </div>
 
   <app-footer></app-footer>
-  
-
 </body>
-

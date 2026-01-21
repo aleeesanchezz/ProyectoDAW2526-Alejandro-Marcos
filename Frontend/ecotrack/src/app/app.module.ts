@@ -18,6 +18,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ObjetivoReduccionComponent } from './components/objetivo-reduccion/objetivo-reduccion.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
+import { DashboardsComponent } from './components/dashboards/dashboards.component';
+import { RegistrarObjetivoComponent } from './components/registrar-objetivo/registrar-objetivo.component';
 
 
 
@@ -32,7 +34,8 @@ const routes: Routes = [
   {path: 'ayuda-password', component: AyudaPasswordComponent},
   {path: 'reiniciar-password', component: ReiniciarPasswordComponent},
   {path: 'modificar-consumo', component: ModificarConsumoComponent},
-  {path: 'verificar-codigo', component: VerificarCodigoComponent} 
+  {path: 'verificar-codigo', component: VerificarCodigoComponent} ,
+  {path: 'registrar-objetivo', component: RegistrarObjetivoComponent}
 
 ]
 
@@ -52,6 +55,8 @@ const routes: Routes = [
     ObjetivoReduccionComponent,
     FooterComponent,
     VerificarCodigoComponent,
+    DashboardsComponent,
+    RegistrarObjetivoComponent,
   ],
   imports: [
     BrowserModule,

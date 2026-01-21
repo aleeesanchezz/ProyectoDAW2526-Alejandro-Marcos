@@ -1,5 +1,7 @@
 package com.proyecto.ecotrack_backend.dto;
 
+import com.proyecto.ecotrack_backend.modelos.Estado;
+
 import java.time.LocalDate;
 
 public class ObjetivoReduccionDto {
@@ -7,9 +9,8 @@ public class ObjetivoReduccionDto {
     private Integer id;
     private Integer id_usuario;
     private double meta_co2;
-    private LocalDate fecha_inicio;
-    private LocalDate fecha_fin;
-    private boolean completado;
+    private LocalDate fechaInicio;
+    private Estado estado;
     private String descripcion;
 
     public ObjetivoReduccionDto() {
@@ -39,28 +40,20 @@ public class ObjetivoReduccionDto {
         this.meta_co2 = meta_co2;
     }
 
-    public LocalDate getFecha_inicio() {
-        return fecha_inicio;
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha_inicio(LocalDate fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFecha_fin() {
-        return fecha_fin;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setFecha_fin(LocalDate fecha_fin) {
-        this.fecha_fin = fecha_fin;
-    }
-
-    public boolean isCompletado() {
-        return completado;
-    }
-
-    public void setCompletado(boolean completado) {
-        this.completado = completado;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public String getDescripcion() {
