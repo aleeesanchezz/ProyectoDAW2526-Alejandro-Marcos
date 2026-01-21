@@ -6,7 +6,6 @@ import com.proyecto.ecotrack_backend.modelos.PasswordResetToken;
 import com.proyecto.ecotrack_backend.modelos.Usuario;
 import com.proyecto.ecotrack_backend.repositorio.PasswordResetTokenRepository;
 import com.proyecto.ecotrack_backend.repositorio.UsuarioRepositorio;
-import com.proyecto.ecotrack_backend.seguridad.CodificarPassword;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +17,15 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     private final UsuarioRepositorio usuarioRepo;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordEncoder codificarPassword;
+    private final com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio consumoRepositorio;
+    private final com.proyecto.ecotrack_backend.repositorio.ObjetivoReduccionRepositorio objetivoReduccionRepositorio;
 
-    public UsuarioServicioImpl(UsuarioRepositorio usuarioRepo, PasswordResetTokenRepository passwordResetTokenRepository, PasswordEncoder codificarPassword) {
+    public UsuarioServicioImpl(UsuarioRepositorio usuarioRepo, PasswordResetTokenRepository passwordResetTokenRepository, PasswordEncoder codificarPassword, com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio consumoRepositorio, com.proyecto.ecotrack_backend.repositorio.ObjetivoReduccionRepositorio objetivoReduccionRepositorio) {
         this.usuarioRepo = usuarioRepo;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.codificarPassword = codificarPassword;
+        this.consumoRepositorio = consumoRepositorio;
+        this.objetivoReduccionRepositorio = objetivoReduccionRepositorio;
     }
 
     @Override
@@ -53,8 +56,18 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     @Override
     public void eliminarUsuarioPorId(int id) {
-        passwordResetTokenRepository.deleteByUsuarioId(id);
-        usuarioRepo.deleteById(id);
+        try {
+            // Eliminar objetivos de reducción del usuario
+            objetivoReduccionRepositorio.deleteByUsuarioId(id);
+            // Eliminar consumos del usuario
+            consumoRepositorio.deleteByUsuarioId(id);
+            // Eliminar tokens de restablecimiento de contraseña
+            passwordResetTokenRepository.deleteByUsuarioId(id);
+            // Eliminar usuario
+            usuarioRepo.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar el usuario: " + e.getMessage(), e);
+        }
     }
 
     @Override
@@ -91,4 +104,6 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     public void guardarToken(PasswordResetToken passwordResetToken) {
         passwordResetTokenRepository.save(passwordResetToken);
     }
+
+
 }

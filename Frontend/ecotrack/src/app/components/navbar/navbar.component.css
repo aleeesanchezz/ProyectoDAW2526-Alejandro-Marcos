@@ -2,7 +2,7 @@
     background-color: #4CAF50;
     color: white;
     box-shadow: 10px 0px 15px rgb(156, 156, 156);
-
+    height: 80px;
 }
 
 .navbar-title {
@@ -10,13 +10,18 @@
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .nav-link{
     color: white;
+    font-size: 18px;
+}
+
+h1{
+  
 }
 
 #usuario {

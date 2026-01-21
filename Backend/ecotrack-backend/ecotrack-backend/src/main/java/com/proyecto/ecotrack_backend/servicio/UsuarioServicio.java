@@ -56,4 +56,5 @@ public interface UsuarioServicio {
     public Usuario login(String email, String password);
 
     public void guardarToken(PasswordResetToken passwordResetToken);
+
 }

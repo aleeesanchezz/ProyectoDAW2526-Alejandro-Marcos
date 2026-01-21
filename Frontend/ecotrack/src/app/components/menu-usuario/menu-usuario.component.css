@@ -2,10 +2,15 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 1rem;
     font-family: sans-serif;
     gap: 2rem;
     position: relative;
+}
+
+main{
+    background-color: rgb(240, 243, 255);
+    padding: 2rem;
+    height: 100vh;
 }
 
 h2{
@@ -19,7 +24,7 @@ form{
     width: 400px;
     background-color: white;
     padding: 2rem;
-
+    background-color: rgb(240, 243, 255);
 }
 
 label{
@@ -30,8 +35,16 @@ input{
     border-top: none;
     border-right: none;
     border-left: none;
+    border-bottom: 1px solid lightgray;
     margin-top: 0.5rem;
     color: gray;
+    background-color: rgb(240, 243, 255);
+    border-radius: 3px;
+    ;
+}
+
+input:focus{
+    background-color: rgb(229, 233, 250);
 }
 
 #iniciarSesion{
@@ -49,9 +62,7 @@ span{
     font-size: 15px;
 }
 
-input{
-    border-radius: 3px;
-}
+
 
 
 

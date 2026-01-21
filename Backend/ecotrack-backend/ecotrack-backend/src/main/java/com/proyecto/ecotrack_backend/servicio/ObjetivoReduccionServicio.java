@@ -15,17 +15,10 @@ public interface ObjetivoReduccionServicio {
 
     /**
      *
-     * @param objetivo a guardar
+     * @param objetivoDto a guardar
      * @return el mismo objetivo que se ha guardado
      */
     public ObjetivoReduccion guardarObjetivo(ObjetivoReduccionDto objetivoDto);
-
-    /**
-     *
-     * @param id de un objetivo
-     * @return el objetivo correspondiente
-     */
-    public ObjetivoReduccion obtenerPorId(Integer id);
 
 
     /**

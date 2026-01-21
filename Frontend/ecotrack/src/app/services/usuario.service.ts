@@ -44,7 +44,7 @@ export class UsuarioService {
 
   //Metodo que lanza una peticion DELETE para eliminar un usuario
   eliminarUsuario(id: any):Observable<any>{
-    return this.http.delete(this.api+'/'+id);
+    return this.http.delete(this.api+'/'+id, {responseType: 'text'});
   }
 
   //Metodo que lanza una peticion POST para ver si el email existe

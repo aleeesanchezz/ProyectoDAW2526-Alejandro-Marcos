@@ -98,8 +98,13 @@ export class MenuUsuarioComponent implements OnInit{
     this.usuarioService.eliminarUsuario(idUsuario).subscribe({
       next: (res) => {
         console.log('Usuario eliminado correctamente');
+        this.mostrarAlertaEliminarUsuario = false; // Cerrar el modal de confirmación
         this.mensaje = 'Usuario eliminado correctamente';
-        this.cerrarSesion();
+        this.error = '';
+        // Dar tiempo para mostrar el mensaje antes de cerrar sesión
+        setTimeout(() => {
+          this.cerrarSesion();
+        }, 2000);
       },
       error: (err) => {
         this.error = err.error?.message || 'No se ha podido eliminar al usuario';
