@@ -17,6 +17,6 @@ public class ControladorEstadistica {
 
     @GetMapping("/{id}")
     public double ObtenerTotalCo2MesActual(@PathVariable Integer id){
-        return estadisticaServicio.obtenerTotalCo2MesActual(id);
+        return estadisticaServicio.obtenerTotalCo2Mes(id);
     }
 }

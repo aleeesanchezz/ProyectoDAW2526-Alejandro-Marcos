@@ -15,11 +15,11 @@ import { AyudaPasswordComponent } from './components/ayuda-password/ayuda-passwo
 import { ReiniciarPasswordComponent } from './components/reiniciar-password/reiniciar-password.component';
 import { ModificarConsumoComponent } from './components/modificar-consumo/modificar-consumo.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ObjetivoReduccionComponent } from './components/objetivo-reduccion/objetivo-reduccion.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { VerificarCodigoComponent } from './components/verificar-codigo/verificar-codigo.component';
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
 import { RegistrarObjetivoComponent } from './components/registrar-objetivo/registrar-objetivo.component';
+import { ListaObjetivosComponent } from './components/lista-objetivos/lista-objetivos.component';
 
 
 
@@ -35,7 +35,8 @@ const routes: Routes = [
   {path: 'reiniciar-password', component: ReiniciarPasswordComponent},
   {path: 'modificar-consumo', component: ModificarConsumoComponent},
   {path: 'verificar-codigo', component: VerificarCodigoComponent} ,
-  {path: 'registrar-objetivo', component: RegistrarObjetivoComponent}
+  {path: 'registrar-objetivo', component: RegistrarObjetivoComponent},
+  {path: 'lista-objetivos', component: ListaObjetivosComponent}
 
 ]
 
@@ -52,11 +53,11 @@ const routes: Routes = [
     ReiniciarPasswordComponent,
     ModificarConsumoComponent,
     NavbarComponent,
-    ObjetivoReduccionComponent,
     FooterComponent,
     VerificarCodigoComponent,
     DashboardsComponent,
     RegistrarObjetivoComponent,
+    ListaObjetivosComponent,
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,9 @@ public class ObjetivoReduccion {
     @Column(nullable = false)
     private LocalDate fechaInicio;
 
+    @Column(nullable = false)
+    private LocalDate fechaFin;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -39,12 +42,12 @@ public class ObjetivoReduccion {
 
 
 
-    public ObjetivoReduccion(Integer id, Usuario usuario, double meta_co2, LocalDate fechaInicio, Estado estado, String descripcion) {
+    public ObjetivoReduccion(Integer id, Usuario usuario, double meta_co2, LocalDate fechaInicio, LocalDate fechaFin, Estado estado, String descripcion) {
         this.id = id;
         this.usuario = usuario;
         this.meta_co2 = meta_co2;
         this.fechaInicio = fechaInicio;
-
+        this.fechaFin = fechaFin;
         this.estado = estado;
         this.descripcion = descripcion;
     }
@@ -79,6 +82,14 @@ public class ObjetivoReduccion {
 
     public void setFechaInicio(LocalDate fecha_inicio) {
         this.fechaInicio = fecha_inicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public Estado getEstado() {

@@ -1,8 +1,10 @@
 package com.proyecto.ecotrack_backend.servicio;
 
 import com.proyecto.ecotrack_backend.dto.ObjetivoReduccionDto;
+import com.proyecto.ecotrack_backend.modelos.Estado;
 import com.proyecto.ecotrack_backend.modelos.ObjetivoReduccion;
 import com.proyecto.ecotrack_backend.modelos.Usuario;
+import com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio;
 import com.proyecto.ecotrack_backend.repositorio.ObjetivoReduccionRepositorio;
 import com.proyecto.ecotrack_backend.repositorio.UsuarioRepositorio;
 import org.springframework.stereotype.Service;
@@ -15,22 +17,38 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
 
     private final ObjetivoReduccionRepositorio objetivoRepositorio;
     private final UsuarioRepositorio usuarioRepositorio;
+    private final ConsumoRepositorio consumoRepositorio;
 
-    public ObjetivoReduccionServicioImpl(ObjetivoReduccionRepositorio objetivoRepositorio, UsuarioRepositorio usuarioRepositorio) {
+    public ObjetivoReduccionServicioImpl(ObjetivoReduccionRepositorio objetivoRepositorio, UsuarioRepositorio usuarioRepositorio, ConsumoRepositorio consumoRepositorio) {
         this.objetivoRepositorio = objetivoRepositorio;
         this.usuarioRepositorio = usuarioRepositorio;
+        this.consumoRepositorio = consumoRepositorio;
     }
 
     @Override
     public List<ObjetivoReduccion> obtenerObjetivos(Integer id) {
 
+        List<ObjetivoReduccion> objetivos = objetivoRepositorio.findByUsuarioId(id);
+
+        for(ObjetivoReduccion objetivo : objetivos){
+            LocalDate fechaInicioObjetivo = objetivo.getFechaInicio();
+            LocalDate fechaFinObjetivo = fechaInicioObjetivo.withDayOfMonth(fechaInicioObjetivo.lengthOfMonth());
+
+            double sumaCo2MesObjetivo = consumoRepositorio.obtenerTotalCo2PorPeriodo(id, fechaInicioObjetivo, fechaFinObjetivo);
+        }
         return objetivoRepositorio.findByUsuarioId(id);
     }
 
     @Override
     public ObjetivoReduccion guardarObjetivo(ObjetivoReduccionDto objetivoDto) {
+
+        LocalDate fechaInicioObjetivo = objetivoDto.getFechaInicio();
+        LocalDate fechaFinObjetivo = fechaInicioObjetivo.withDayOfMonth(fechaInicioObjetivo.lengthOfMonth());
+
         LocalDate inicioMes = LocalDate.now().withDayOfMonth(1);
         LocalDate finMes = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+
+
 
         ObjetivoReduccion objetivoExistente = objetivoRepositorio.obtenerObjetivoMesActual(objetivoDto.getId_usuario(),
                 inicioMes, finMes);
@@ -46,6 +64,7 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
         objetivo.setUsuario(usuario);
         objetivo.setMeta_co2(objetivoDto.getMeta_co2());
         objetivo.setFechaInicio(objetivoDto.getFechaInicio());
+        objetivo.setFechaFin(fechaFinObjetivo);
         objetivo.setEstado(objetivoDto.getEstado());
         objetivo.setDescripcion(objetivoDto.getDescripcion());
 

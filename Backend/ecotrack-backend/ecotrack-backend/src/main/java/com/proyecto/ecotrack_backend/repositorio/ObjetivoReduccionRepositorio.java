@@ -28,4 +28,6 @@ public interface ObjetivoReduccionRepositorio extends JpaRepository<ObjetivoRedu
             @Param("fechaInicio")LocalDate fechaInicio,
             @Param("fechaFin") LocalDate fechaFin
             );
+
+    //Obtiene
 }

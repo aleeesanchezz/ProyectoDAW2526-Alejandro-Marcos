@@ -16,11 +16,15 @@ public class EstadisticaServicioImpl implements EstadisticaServicio{
     }
 
     @Override
-    public double obtenerTotalCo2MesActual(Integer idUsuario) {
+    public double obtenerTotalCo2Mes(Integer idUsuario) {
 
-        LocalDate inicioMes = LocalDate.now().withDayOfMonth(1); // Devuelve el primer dia del mes actual
-        LocalDate finMes = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()); // Devuelve el último dia del mes actual
+        LocalDate inicioMesAnterior = LocalDate.now()
+                .minusMonths(1)
+                .withDayOfMonth(1);
 
-        return consumoRepositorio.obtenerTotalCo2PorPeriodo(idUsuario, inicioMes, finMes);
+        LocalDate finMesAnterior = inicioMesAnterior
+                .withDayOfMonth(inicioMesAnterior.lengthOfMonth());
+
+        return consumoRepositorio.obtenerTotalCo2PorPeriodo(idUsuario, inicioMesAnterior, finMesAnterior);
     }
 }

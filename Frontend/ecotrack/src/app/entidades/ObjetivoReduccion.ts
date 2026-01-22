@@ -7,6 +7,7 @@ export class ObjetivoReduccion{
         public id_usuario: number,
         public meta_co2: number,
         public fechaInicio: string,
+        public fechaFin: string,
         public estado: Estado,
         public descripcion?: string
     ){}

@@ -24,6 +24,11 @@ export class HistorialConsumoComponent implements OnInit{
 
   constructor(private authService: AuthServiceService, private consumoService: ConsumoService, private router: Router){}
 
+  private nombresMes = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+
   
 
   ngOnInit(): void {
@@ -42,6 +47,15 @@ export class HistorialConsumoComponent implements OnInit{
     this.consumoService.obtenerListas(idUsuario).subscribe({
       next: (res) =>{
         this.consumos = res;
+
+        // Procesar cada objetivo para sacar mes y año
+        this.consumos.forEach(con => {
+          if (con.fecha) {
+            const [anio, mes] = con.fecha.split('-');
+            const nombreMes = this.nombresMes[Number(mes) - 1];
+            con.fecha = `${nombreMes} ${anio}`;   
+          }
+        });
         console.log(this.consumos);
       }
     })  
@@ -77,7 +91,6 @@ export class HistorialConsumoComponent implements OnInit{
   }
 
   mostrarModalEliminar(id: any){
-
     this.modalEliminar = true;
     localStorage.setItem('idConsumo', JSON.stringify(id));
   }

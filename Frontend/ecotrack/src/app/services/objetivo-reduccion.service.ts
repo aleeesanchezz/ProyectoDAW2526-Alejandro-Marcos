@@ -17,5 +17,15 @@ export class ObjetivoReduccionService {
     return this.httpClient.post<ObjetivoReduccion>(this.api, objetivoReduccion);
   }
 
+  //Metodo que lanza una peticion GET para obtener los objetivos de reducción del usuario
+  obtenerObjetivos(id: any):Observable<ObjetivoReduccion[]>{
+    return this.httpClient.get<ObjetivoReduccion[]>(this.api + "/" +id);
+  }
+
+  //Metodo que lanza una peticion DELETE para borrar un objetivo
+  eliminarObjetivo(id: any):Observable<any>{
+    return this.httpClient.delete(this.api + '/' + id);
+  }
+
   
 }

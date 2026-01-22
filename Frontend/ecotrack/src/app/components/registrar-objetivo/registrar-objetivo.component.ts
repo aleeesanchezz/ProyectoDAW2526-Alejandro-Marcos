@@ -16,10 +16,17 @@ export class RegistrarObjetivoComponent implements OnInit{
   id: any = null;
   meta_co2: number = 0;
   fechaInicio: string = '';
+  fechaFin: string = '';
   estado: Estado = Estado.EN_PROGRESO;
   descripcion: string = '';
 
+  anios: number[] = [];
+  anio!: number;
+  mes!: number;
+
+
   mensaje: string = '';
+  error: string = '';
 
   fechaInvalida: boolean = false;
 
@@ -27,19 +34,16 @@ export class RegistrarObjetivoComponent implements OnInit{
     if(!this.usuarioActual){
       this.authService.redirigirLogin();
     }
+
+    const anioActual = new Date().getFullYear();
+
+    for (let i = 0; i <= 10; i++) {
+      this.anios.push(anioActual + i);
+    }
   }
 
   usuarioActual = this.authService.getUsuario();
 
-    comprobarFecha(){
-
-    const fechaActual: Date = new Date();
-    if(this.fechaInicio < fechaActual.toISOString().split('T')[0]){
-      this.fechaInicio = fechaActual.toISOString().split('T')[0];
-      this.fechaInvalida = true;
-    }
-
-  }
 
   registrarObjetivo(){
 
@@ -50,12 +54,15 @@ export class RegistrarObjetivoComponent implements OnInit{
       return;
     }
 
+    const fechaInicio = `${this.anio}-${String(this.mes).padStart(2, '0')}-01`;
+
 
       let objetivoReduccion = new ObjetivoReduccion(
       this.id,
       usuarioActual.id,
       this.meta_co2,
-      this.fechaInicio,
+      fechaInicio,
+      this.fechaFin,
       this.estado,
       this.descripcion
     );
@@ -67,7 +74,7 @@ export class RegistrarObjetivoComponent implements OnInit{
       }, 
       error: (err) => {
         console.log(err);
-        this.mensaje = "Error al registrar el objetivo";
+        this.error = "Ya has registrado un objetivo este mes";
       }
     })
 

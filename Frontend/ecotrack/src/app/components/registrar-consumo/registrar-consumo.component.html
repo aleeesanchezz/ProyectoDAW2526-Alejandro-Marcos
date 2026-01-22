@@ -48,14 +48,25 @@
             </div>
         </div>
 
-        <div class="mb-3">
-          Fecha *
-            <input [(ngModel)]="fecha" type="date" class="form-control" id="fecha" name="fecha" (change)="comprobarFecha()" required #fec="ngModel">
-            <span *ngIf="fechaInvalida" style="color: red;">La fecha no puede ser futura</span>
-            <div style="color: red;" [hidden]="fec.valid || fec.untouched">
-                Este campo es obligatorio
-            </div>
-        </div>
+         Año: 
+    <select [(ngModel)]="anio" name="anio" required class="form-control mb-2">
+        <option *ngFor="let y of anios" [value]="y">{{ y }}</option>
+    </select>
+    Mes:
+    <select [(ngModel)]="mes" name="mes" required class="form-control mb-2">
+        <option value="1">Enero</option>
+        <option value="2">Febrero</option>
+        <option value="3">Marzo</option>
+        <option value="4">Abril</option>
+        <option value="5">Mayo</option>
+        <option value="6">Junio</option>
+        <option value="7">Julio</option>
+        <option value="8">Agosto</option>
+        <option value="9">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+    </select>
 
         <div class="mb-3">
             <textarea [(ngModel)]="notas" class="form-control" id="notas" name="notas" placeholder="Escribe una nota" rows="3"></textarea>

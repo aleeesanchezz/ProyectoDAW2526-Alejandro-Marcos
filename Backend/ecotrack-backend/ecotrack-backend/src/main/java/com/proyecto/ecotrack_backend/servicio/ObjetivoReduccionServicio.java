@@ -1,6 +1,7 @@
 package com.proyecto.ecotrack_backend.servicio;
 
 import com.proyecto.ecotrack_backend.dto.ObjetivoReduccionDto;
+import com.proyecto.ecotrack_backend.modelos.Estado;
 import com.proyecto.ecotrack_backend.modelos.ObjetivoReduccion;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public interface ObjetivoReduccionServicio {
      * @param id de un objetivo
      */
     public void eliminarPorId(Integer id);
+
+
 
     public ObjetivoReduccion actualizarObjetivo(ObjetivoReduccionDto objetivoDto);
 

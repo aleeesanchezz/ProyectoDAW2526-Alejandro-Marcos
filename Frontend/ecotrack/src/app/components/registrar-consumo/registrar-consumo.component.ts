@@ -20,8 +20,11 @@ export class RegistrarConsumoComponent implements OnInit{
   co2: number = 0;
   notas: string = '';
 
+  anios: number[] = [];
+  anio!: number;
+  mes!: number;
+
   unidadCorrecta: boolean = false;
-  fechaInvalida: boolean = false;
   mensaje: string = '';
 
   constructor(private consumoService: ConsumoService, private authService: AuthServiceService){}
@@ -29,6 +32,12 @@ export class RegistrarConsumoComponent implements OnInit{
   ngOnInit(): void {
     if(!this.usuarioActual){
       this.authService.redirigirLogin();
+    }
+
+    const anioActual = new Date().getFullYear();
+
+    for (let i = 0; i <= 5; i++) {
+      this.anios.push(anioActual - i);
     }
     
   }
@@ -69,12 +78,14 @@ export class RegistrarConsumoComponent implements OnInit{
       return;
     }
 
+      const fechaInicio = `${this.anio}-${String(this.mes).padStart(2, '0')}-01`;
+
     let consumo = new Consumo(this.id,
       usuarioActual.id,
       this.categoria as Categoria,
       this.cantidad,
       this.unidad as Unidad,
-      this.fecha,
+      fechaInicio,
       this.co2,
       this.notas);
 
@@ -105,15 +116,7 @@ export class RegistrarConsumoComponent implements OnInit{
     return this.unidadCorrecta;
   }
 
-  comprobarFecha(){
 
-    const fechaActual: Date = new Date();
-    if(this.fecha > fechaActual.toISOString().split('T')[0]){
-      this.fecha = fechaActual.toISOString().split('T')[0];
-      this.fechaInvalida = true;
-    }
-
-  }
 
 
   limpiar(){

@@ -17,14 +17,27 @@
             </div>
         </div>
 
-        <div class="mb-3">
-          Fecha de inicio *
-            <input [(ngModel)]="fechaInicio" type="date" class="form-control" id="fecha" name="fecha" (change)="comprobarFecha()" required #fec="ngModel">
-            <span *ngIf="fechaInvalida" style="color: red;">La fecha no puede ser anterior a hoy</span>
-            <div style="color: red;" [hidden]="fec.valid || fec.untouched">
-                Este campo es obligatorio
-            </div>
-        </div>
+    Año: 
+    <select [(ngModel)]="anio" name="anio" required class="form-control mb-2">
+        <option *ngFor="let y of anios" [value]="y">{{ y }}</option>
+    </select>
+    Mes:
+    <select [(ngModel)]="mes" name="mes" required class="form-control mb-2">
+        <option value="1">Enero</option>
+        <option value="2">Febrero</option>
+        <option value="3">Marzo</option>
+        <option value="4">Abril</option>
+        <option value="5">Mayo</option>
+        <option value="6">Junio</option>
+        <option value="7">Julio</option>
+        <option value="8">Agosto</option>
+        <option value="9">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+    </select>
+
+
 
         <div class="mb-3">
             <textarea [(ngModel)]="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Escribe una descripcion" rows="3"></textarea>
@@ -35,7 +48,10 @@
     </form>
 
     <div *ngIf="mensaje" class="alert alert-success mt-3">
-        {{ mensaje }} <p>Co2 generado: {{ co2 }}</p>
+        {{ mensaje }}
+    </div>
+    <div *ngIf="error" class="alert alert-danger mt-3">
+        {{error}}
     </div>
 
     <h2>
