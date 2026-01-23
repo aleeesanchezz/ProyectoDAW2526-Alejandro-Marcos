@@ -102,12 +102,12 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
         Double meta_co2 = objetivoReduccion.getMeta_co2();
         Double sumaCo2Mes = consumoRepositorio.obtenerTotalCo2PorPeriodo(id, objetivoReduccion.getFechaInicio(), objetivoReduccion.getFechaFin());
 
-        if(sumaCo2Mes < meta_co2){
-            objetivoReduccion.setEstado(Estado.COMPLETADO);
+        if(sumaCo2Mes == 0){
+            objetivoReduccion.setEstado(Estado.EN_PROGRESO);
         } else if(sumaCo2Mes >= meta_co2){
             objetivoReduccion.setEstado(Estado.FALLIDO);
-        } else if(sumaCo2Mes == null){
-            objetivoReduccion.setEstado(Estado.FINALIZADO);
+        } else if(sumaCo2Mes < meta_co2){
+            objetivoReduccion.setEstado(Estado.COMPLETADO);
         }
     }
 

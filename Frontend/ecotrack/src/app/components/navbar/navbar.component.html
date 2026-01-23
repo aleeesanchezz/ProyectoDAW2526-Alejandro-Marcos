@@ -1,8 +1,22 @@
-<nav class="navbar navbar-expand-lg" id="encabezado">
+<nav class="navbar navbar-expand-lg navbar-light" id="encabezado">
   <div class="container-fluid position-relative d-flex align-items-center">
 
-    <!-- IZQUIERDA -->
+    <!-- Toggle (mobile) -->
+    <button class="navbar-toggler me-2" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <!-- TÍTULO -->
+    <h1 class="navbar-title flex-grow-1 text-center m-0">
+      Ecotrack
+    </h1>
+
+    <!-- IZQUIERDA / COLLAPSE -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -28,20 +42,9 @@
       </ul>
     </div>
 
-    <!-- TÍTULO -->
-    <h1 class="navbar-title">
-      Ecotrack
-    </h1>
-
     <!-- DERECHA -->
-    <div class="d-flex align-items-center ms-auto gap-2">
-      <button class="navbar-toggler" type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <button id="usuario" class="btn btn-secondary rounded-circle" routerLink="/menu-usuario">
+    <div class="d-flex align-items-center ms-2">
+      <button id="usuario" class="btn" routerLink="/menu-usuario">
         {{ primeraLetra }}
       </button>
     </div>

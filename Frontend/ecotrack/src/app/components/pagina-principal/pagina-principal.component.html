@@ -1,6 +1,24 @@
 <body *ngIf="usuarioActual">
   <app-navbar></app-navbar>
 
+
+  <div id="imagen-contenedor">
+    <img src="https://wallpapers.com/images/hd/forest-desktop-3wm9lhe8bm372dz4.jpg" alt="">
+    <div class="hero-overlay">
+      <h1>Cada consumo cuenta, cada acción importa</h1>
+      <div class="nav-item dropdown" id="objetivos">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          Empezar a reducir
+        </a>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item" routerLink="/registrar-objetivo">Crear nuevo objetivo de reducción</button></li>
+          <li><button class="dropdown-item" routerLink="/lista-objetivos">Mis objetivos</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    
+
   <div class="container-main">
     <!-- Hero Section con Estadísticas -->
     <section class="hero-stats">
@@ -26,6 +44,7 @@
     </section>
 
     <!-- Acciones Rápidas -->
+    
  
 
     <!-- Gráficos y Dashboard -->
@@ -34,16 +53,6 @@
     </section>
 
     <app-dashboards></app-dashboards>
-    
-    <div class="nav-item dropdown" id="objetivos">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-        Objetivos de reducción
-      </a>
-      <ul class="dropdown-menu">
-        <li><button class="dropdown-item" routerLink="/registrar-objetivo">Crear nuevo objetivo de reducción</button></li>
-        <li><button class="dropdown-item" routerLink="/lista-objetivos">Mis objetivos</button></li>
-      </ul>
-    </div>
   </div>
 
   <app-footer></app-footer>
