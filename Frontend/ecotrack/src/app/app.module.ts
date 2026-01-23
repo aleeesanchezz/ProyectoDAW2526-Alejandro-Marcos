@@ -20,6 +20,7 @@ import { VerificarCodigoComponent } from './components/verificar-codigo/verifica
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
 import { RegistrarObjetivoComponent } from './components/registrar-objetivo/registrar-objetivo.component';
 import { ListaObjetivosComponent } from './components/lista-objetivos/lista-objetivos.component';
+import { Co2ChartComponent } from './components/co2-chart/co2-chart.component';
 
 
 
@@ -58,6 +59,7 @@ const routes: Routes = [
     DashboardsComponent,
     RegistrarObjetivoComponent,
     ListaObjetivosComponent,
+    Co2ChartComponent
   ],
   imports: [
     BrowserModule,
