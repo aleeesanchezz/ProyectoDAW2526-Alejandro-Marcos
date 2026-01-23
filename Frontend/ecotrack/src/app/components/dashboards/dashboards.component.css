@@ -1,0 +1,15 @@
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto;
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.10),
+    0 18px 40px rgba(0, 0, 0, 0.08);
+  background-color: white;
+  border-radius: 20px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 550px;
+}
