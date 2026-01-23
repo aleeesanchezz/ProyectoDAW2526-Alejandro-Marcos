@@ -1,6 +1,7 @@
-div{
+.dashboard{
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 3rem;
   margin-left: 10rem;
   margin-right: 10rem;

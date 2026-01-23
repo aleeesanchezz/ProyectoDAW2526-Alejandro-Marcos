@@ -27,10 +27,5 @@ export class ObjetivoReduccionService {
     return this.httpClient.delete(this.api + '/' + id);
   }
 
-  //Metodo que lanza una peticion GET para ver si la fecha final del objetivo ya se ha alcanzado
-  comprobarFechaFinalizada(id: any):Observable<boolean>{
-    return this.httpClient.get<boolean>(this.api + '/comprobar-fecha/' + id);
-  }
-
   
 }

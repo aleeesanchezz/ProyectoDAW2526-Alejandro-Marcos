@@ -19,6 +19,7 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
     private final UsuarioRepositorio usuarioRepositorio;
     private final ConsumoRepositorio consumoRepositorio;
 
+
     public ObjetivoReduccionServicioImpl(ObjetivoReduccionRepositorio objetivoRepositorio, UsuarioRepositorio usuarioRepositorio, ConsumoRepositorio consumoRepositorio) {
         this.objetivoRepositorio = objetivoRepositorio;
         this.usuarioRepositorio = usuarioRepositorio;
@@ -70,35 +71,44 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
     }
 
     @Override
-    public boolean comprobarFechaFinalizada(Integer id) {
+    public Estado comprobarFechaFinalizadaYEstado(Integer id) {
         List<ObjetivoReduccion> objetivos = objetivoRepositorio.findByUsuarioId(id);
 
         LocalDate fechaActual = LocalDate.now();
 
         boolean fechaFinalizada = false;
 
+        Estado ultimoEstado = null;
+
         for(ObjetivoReduccion objetivo : objetivos){
             LocalDate fechaFinObjetivo = objetivo.getFechaFin();
 
             if(fechaFinObjetivo.isBefore(fechaActual) || fechaFinObjetivo.equals(fechaActual)){
-                fechaFinalizada = true;
+                cambiarEstadoFinal(objetivo, id);
+                objetivoRepositorio.save(objetivo);
+                ultimoEstado = objetivo.getEstado();
 
-            } else{
-                fechaFinalizada = false;
             }
 
         }
 
-        return fechaFinalizada;
 
+        return ultimoEstado;
     }
 
     @Override
-    public void cambiarEstadoFinal(ObjetivoReduccion objetivoReduccion) {
+    public void cambiarEstadoFinal(ObjetivoReduccion objetivoReduccion, Integer id) {
 
-        double meta_co2 = objetivoReduccion.getMeta_co2();
+        Double meta_co2 = objetivoReduccion.getMeta_co2();
+        Double sumaCo2Mes = consumoRepositorio.obtenerTotalCo2PorPeriodo(id, objetivoReduccion.getFechaInicio(), objetivoReduccion.getFechaFin());
 
-        
+        if(sumaCo2Mes < meta_co2){
+            objetivoReduccion.setEstado(Estado.COMPLETADO);
+        } else if(sumaCo2Mes >= meta_co2){
+            objetivoReduccion.setEstado(Estado.FALLIDO);
+        } else if(sumaCo2Mes == null){
+            objetivoReduccion.setEstado(Estado.FINALIZADO);
+        }
     }
 
     @Override

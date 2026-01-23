@@ -35,7 +35,7 @@ export class ListaObjetivosComponent implements OnInit {
     }
 
     this.obtenerObjetivos();
-    this.comprobarFechaFinalizada();
+
   }
 
   obtenerObjetivos(): void {
@@ -132,19 +132,5 @@ export class ListaObjetivosComponent implements OnInit {
     });
   }
 
-  comprobarFechaFinalizada(){
-    const idUsuarioActual = this.usuarioActual?.id;
 
-    if (!idUsuarioActual) {
-      return;
-    }
-
-    this.objetivoService.comprobarFechaFinalizada(idUsuarioActual).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err)=>{
-      }
-    })
-  }
 }

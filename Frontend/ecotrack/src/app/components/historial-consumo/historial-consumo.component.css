@@ -47,10 +47,11 @@ span{
   min-width: 100px;
 }
 
-#modal-eliminar{
+.card-body{
     position: absolute;
+    z-index: 10;
+    top: 300px;
     background-color: white;
-    top: 200px;
     padding: 1rem;
     box-shadow: 5px 7px 15px;
     border-radius: 10px;

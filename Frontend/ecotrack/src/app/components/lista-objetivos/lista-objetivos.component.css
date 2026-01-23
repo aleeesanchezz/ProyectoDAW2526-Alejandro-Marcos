@@ -52,9 +52,10 @@ section{
 }
 
 .card-body{
-    position: absolute;
+    position: sticky;
     background-color: white;
-    top: 200px;
+    bottom: 300px;
+    z-index: 10;
     padding: 1rem;
     box-shadow: 5px 7px 15px;
     border-radius: 10px;

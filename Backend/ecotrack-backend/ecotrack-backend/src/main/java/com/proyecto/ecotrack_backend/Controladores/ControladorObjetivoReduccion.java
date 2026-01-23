@@ -1,6 +1,7 @@
 package com.proyecto.ecotrack_backend.Controladores;
 
 import com.proyecto.ecotrack_backend.dto.ObjetivoReduccionDto;
+import com.proyecto.ecotrack_backend.modelos.Estado;
 import com.proyecto.ecotrack_backend.modelos.ObjetivoReduccion;
 import com.proyecto.ecotrack_backend.servicio.ObjetivoReduccionServicio;
 import com.proyecto.ecotrack_backend.servicio.ObjetivoReduccionServicioImpl;
@@ -21,6 +22,7 @@ public class ControladorObjetivoReduccion {
 
     @GetMapping("{id}")
     public List<ObjetivoReduccion> obtenerObjetivos(@PathVariable Integer id){
+        objetivoReduccionServicio.comprobarFechaFinalizadaYEstado(id);
         return this.objetivoReduccionServicio.obtenerObjetivos(id);
     }
 
@@ -34,10 +36,7 @@ public class ControladorObjetivoReduccion {
         objetivoReduccionServicio.eliminarPorId(id);
     }
 
-    @GetMapping("/comprobar-fecha/{id}")
-    public boolean comprobarFechaFinalizada(@PathVariable Integer id){
-        return objetivoReduccionServicio.comprobarFechaFinalizada(id);
-    }
+
 
 
 

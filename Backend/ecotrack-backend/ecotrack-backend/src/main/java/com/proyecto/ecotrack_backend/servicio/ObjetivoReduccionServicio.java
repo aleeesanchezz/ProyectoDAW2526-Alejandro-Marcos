@@ -28,11 +28,11 @@ public interface ObjetivoReduccionServicio {
      */
     public void eliminarPorId(Integer id);
 
-    public boolean comprobarFechaFinalizada(Integer id);
+    public Estado comprobarFechaFinalizadaYEstado(Integer id);
 
     public ObjetivoReduccion actualizarObjetivo(ObjetivoReduccionDto objetivoDto);
 
-    public void cambiarEstadoFinal(ObjetivoReduccion objetivoReduccion);
+    public void cambiarEstadoFinal(ObjetivoReduccion objetivoReduccion, Integer id);
 
 
 }
