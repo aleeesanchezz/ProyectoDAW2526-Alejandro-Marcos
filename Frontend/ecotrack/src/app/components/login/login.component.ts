@@ -22,18 +22,14 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.logout();
-    
+
   }
-
-
-
 
   iniciarSesion(){
     this.usuarioService.validarLogin(this.email, this.password).subscribe({
       next: (res: Usuario) => {
         this.authService.setUsuario(res);
         this.router.navigate(['inicio']);
-        console.log("Login exitoso");
       },
       error: (err) => {
         if(err.status === 401){

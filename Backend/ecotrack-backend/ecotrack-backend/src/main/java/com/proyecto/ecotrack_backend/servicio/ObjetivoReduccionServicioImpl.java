@@ -28,14 +28,6 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
     @Override
     public List<ObjetivoReduccion> obtenerObjetivos(Integer id) {
 
-        List<ObjetivoReduccion> objetivos = objetivoRepositorio.findByUsuarioId(id);
-
-        for(ObjetivoReduccion objetivo : objetivos){
-            LocalDate fechaInicioObjetivo = objetivo.getFechaInicio();
-            LocalDate fechaFinObjetivo = fechaInicioObjetivo.withDayOfMonth(fechaInicioObjetivo.lengthOfMonth());
-
-            double sumaCo2MesObjetivo = consumoRepositorio.obtenerTotalCo2PorPeriodo(id, fechaInicioObjetivo, fechaFinObjetivo);
-        }
         return objetivoRepositorio.findByUsuarioId(id);
     }
 
@@ -51,7 +43,7 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
 
 
         ObjetivoReduccion objetivoExistente = objetivoRepositorio.obtenerObjetivoMesActual(objetivoDto.getId_usuario(),
-                inicioMes, finMes);
+                fechaInicioObjetivo, fechaFinObjetivo);
 
         if(objetivoExistente != null){
             throw new RuntimeException("Ya existe un objetivo de reduccion para este mes");
@@ -78,6 +70,38 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
     }
 
     @Override
+    public boolean comprobarFechaFinalizada(Integer id) {
+        List<ObjetivoReduccion> objetivos = objetivoRepositorio.findByUsuarioId(id);
+
+        LocalDate fechaActual = LocalDate.now();
+
+        boolean fechaFinalizada = false;
+
+        for(ObjetivoReduccion objetivo : objetivos){
+            LocalDate fechaFinObjetivo = objetivo.getFechaFin();
+
+            if(fechaFinObjetivo.isBefore(fechaActual) || fechaFinObjetivo.equals(fechaActual)){
+                fechaFinalizada = true;
+
+            } else{
+                fechaFinalizada = false;
+            }
+
+        }
+
+        return fechaFinalizada;
+
+    }
+
+    @Override
+    public void cambiarEstadoFinal(ObjetivoReduccion objetivoReduccion) {
+
+        double meta_co2 = objetivoReduccion.getMeta_co2();
+
+        
+    }
+
+    @Override
     public ObjetivoReduccion actualizarObjetivo(ObjetivoReduccionDto objetivoDto) {
         ObjetivoReduccion objetivo = objetivoRepositorio.findById(objetivoDto.getId()).get();
 
@@ -87,4 +111,6 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
 
         return objetivoRepositorio.save(objetivo);
     }
+
+
 }

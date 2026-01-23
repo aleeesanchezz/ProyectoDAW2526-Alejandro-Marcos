@@ -35,6 +35,7 @@ export class ListaObjetivosComponent implements OnInit {
     }
 
     this.obtenerObjetivos();
+    this.comprobarFechaFinalizada();
   }
 
   obtenerObjetivos(): void {
@@ -113,13 +114,13 @@ export class ListaObjetivosComponent implements OnInit {
   }
 
   eliminarObjetivo(): void {
-    const idConsumo = localStorage.getItem('idObjetivo');
+    const idObjetivo = localStorage.getItem('idObjetivo');
 
-    if (!idConsumo) {
+    if (!idObjetivo) {
       return;
     }
 
-    this.objetivoService.eliminarObjetivo(idConsumo).subscribe({
+    this.objetivoService.eliminarObjetivo(idObjetivo).subscribe({
       next: () => {
         console.log('Objetivo eliminado');
         this.obtenerObjetivos();
@@ -129,5 +130,21 @@ export class ListaObjetivosComponent implements OnInit {
         console.error('Error al eliminar objetivo', err);
       }
     });
+  }
+
+  comprobarFechaFinalizada(){
+    const idUsuarioActual = this.usuarioActual?.id;
+
+    if (!idUsuarioActual) {
+      return;
+    }
+
+    this.objetivoService.comprobarFechaFinalizada(idUsuarioActual).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err)=>{
+      }
+    })
   }
 }

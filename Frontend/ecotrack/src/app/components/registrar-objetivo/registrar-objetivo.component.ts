@@ -38,7 +38,7 @@ export class RegistrarObjetivoComponent implements OnInit{
     const anioActual = new Date().getFullYear();
 
     for (let i = 0; i <= 10; i++) {
-      this.anios.push(anioActual + i);
+      this.anios.push(anioActual - i);
     }
   }
 

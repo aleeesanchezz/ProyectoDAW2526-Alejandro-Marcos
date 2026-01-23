@@ -34,6 +34,11 @@ public class ControladorObjetivoReduccion {
         objetivoReduccionServicio.eliminarPorId(id);
     }
 
+    @GetMapping("/comprobar-fecha/{id}")
+    public boolean comprobarFechaFinalizada(@PathVariable Integer id){
+        return objetivoReduccionServicio.comprobarFechaFinalizada(id);
+    }
+
 
 
 }
