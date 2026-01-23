@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit{
     this.usuarioService.validarLogin(this.email, this.password).subscribe({
       next: (res: Usuario) => {
         this.authService.setUsuario(res);
-        this.router.navigate(['inicio']);
+        setTimeout(() => {
+          this.router.navigate(['inicio']);
+        }, 1000);
       },
       error: (err) => {
         if(err.status === 401){

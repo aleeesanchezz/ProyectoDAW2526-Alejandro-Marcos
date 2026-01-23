@@ -46,10 +46,7 @@
   color: rgb(48, 160, 48);
 }
 
-#usuario:hover{
-  background-color: rgb(48, 160, 48);
-  color: white;
-}
+
 
 .navbar-toggler {
   border-color: rgba(0, 0, 0, 0.15);
