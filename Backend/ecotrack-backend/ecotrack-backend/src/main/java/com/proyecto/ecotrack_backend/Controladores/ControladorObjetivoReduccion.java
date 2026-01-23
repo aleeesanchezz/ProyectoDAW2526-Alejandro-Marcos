@@ -35,9 +35,5 @@ public class ControladorObjetivoReduccion {
     public void eliminarObjetivo(@PathVariable Integer id){
         objetivoReduccionServicio.eliminarPorId(id);
     }
-
-
-
-
-
+    
 }
