@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
+﻿import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener } from "@angular/core";
 import ApexCharts from "apexcharts";
 import { AuthServiceService } from "../../services/auth-service.service";
 import { ConsumoService } from "../../services/consumo.service";
@@ -10,12 +10,44 @@ import { ConsumoService } from "../../services/consumo.service";
 })
 export class Co2ChartComponent implements OnInit, OnDestroy {
   @ViewChild("chartContainer") chartContainer!: ElementRef;
-  private chart: ApexCharts | null = null;
+  private chart: ApexCharts | any = null;
+  private chartHeight: number = 450;
 
   constructor(
     private authService: AuthServiceService,
     private consumoService: ConsumoService
-  ) {}
+  ) {
+    this.chartHeight = this.obtenerAlturaSegunPantalla();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    const newHeight = this.obtenerAlturaSegunPantalla();
+    if (newHeight !== this.chartHeight) {
+      this.chartHeight = newHeight;
+      if (this.chart) {
+        this.chart.updateOptions({
+          chart: {
+            height: this.chartHeight
+          }
+        });
+      }
+    }
+  }
+
+  private obtenerAlturaSegunPantalla(): number {
+    const width = window.innerWidth;
+    
+    if (width <= 480) {
+      return 280;
+    } else if (width <= 768) {
+      return 320;
+    } else if (width <= 1024) {
+      return 380;
+    } else {
+      return 450;
+    }
+  }
 
   ngOnInit(): void {
     this.cargarGrafico();
@@ -61,7 +93,7 @@ export class Co2ChartComponent implements OnInit, OnDestroy {
       }],
       chart: {
         type: "bar",
-        height: 450,
+        height: this.chartHeight,
         toolbar: { 
           show: false
         }
@@ -85,7 +117,7 @@ export class Co2ChartComponent implements OnInit, OnDestroy {
           }
         },
         labels: {
-          rotate: -45,
+          rotate: -90,
           rotateAlways: true,
           maxHeight: 100,
           style: {
