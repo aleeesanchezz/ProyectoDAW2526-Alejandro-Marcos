@@ -36,4 +36,10 @@ public interface ConsumoServicio {
      * @return el consumo ya actualizado
      */
     public Consumo actualizarConsumo(ConsumoDto consumoDto);
+
+    public byte[] generarPdf(Integer id);
+
+    public String generarHtml(List<Consumo> consumos);
+
+
 }

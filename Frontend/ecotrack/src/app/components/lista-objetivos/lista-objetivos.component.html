@@ -15,6 +15,7 @@
             <p>Fecha de finalizacion: <span>{{objetivo.fechaFin}}</span></p>
             <p>Meta de Co2: <span>{{objetivo.meta_co2}} kg</span></p>
             <p>Estado: <span>{{obtenerEstado(objetivo.estado)}}</span></p>
+            <p>Descripcion: <span>{{objetivo.descripcion}}</span></p>
             <button class="btn btn-danger" (click)="mostrarModalEliminar(objetivo.id)" id="eliminar" style="margin-left: 1rem;" title="Eliminar">
                 <i class="bi bi-trash"></i>
             </button>

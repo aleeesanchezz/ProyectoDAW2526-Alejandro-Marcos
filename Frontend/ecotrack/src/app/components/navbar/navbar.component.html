@@ -11,7 +11,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-   <img src="assets/img/logo_ecotrack_principal.svg" alt="Ecotrack Logo" width="25%">
+   <img src="assets/img/logo_ecotrack_principal.svg" alt="Ecotrack Logo" width="225px">
 
 
     <!-- IZQUIERDA / COLLAPSE -->
@@ -32,8 +32,8 @@
                 Más opciones
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item">Generar pdf de consumos</a></li>
-                <li><a class="dropdown-item">Generar pdf de estadísticas</a></li>
+                <li><button class="dropdown-item" (click)="generarPdfConsumos()">Generar pdf de consumos</button></li>
+                <li><button class="dropdown-item">Generar pdf de estadísticas</button></li>
             </ul>
         </li>
 

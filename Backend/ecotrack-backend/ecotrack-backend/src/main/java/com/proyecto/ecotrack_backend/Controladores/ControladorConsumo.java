@@ -3,6 +3,10 @@ package com.proyecto.ecotrack_backend.Controladores;
 import com.proyecto.ecotrack_backend.dto.ConsumoDto;
 import com.proyecto.ecotrack_backend.modelos.Consumo;
 import com.proyecto.ecotrack_backend.servicio.ConsumoServicio;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +42,18 @@ public class ControladorConsumo {
     public Consumo actualizarConsumo(@RequestBody ConsumoDto consumoDto){
 
         return consumoServicio.actualizarConsumo(consumoDto);
+    }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/generar-pdf/{id}")
+    public ResponseEntity<byte[]> esportarPdf(@PathVariable Integer id){
+        List<Consumo> consumos = consumoServicio.obtenerConsumosPorUsuario(id);
+        byte[] pdf = consumoServicio.generarPdf(id);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_PDF);
+        httpHeaders.setContentDispositionFormData("attachment", "consumos.pdf");
+
+        return new ResponseEntity<>(pdf, httpHeaders, HttpStatus.OK);
     }
 }

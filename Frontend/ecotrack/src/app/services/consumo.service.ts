@@ -34,4 +34,9 @@ export class ConsumoService {
   eliminarConsumo(id: any):Observable<any>{
     return this.http.delete(this.api+'/'+id);
   }
+
+  //Metodo que lanza una peticion GET para obtener el pdf de consumos
+  obtenerPdfConsumos(id: any):Observable<Blob>{
+    return this.http.get(this.api+'/generar-pdf/'+id, { responseType: 'blob' });
+  }
 }

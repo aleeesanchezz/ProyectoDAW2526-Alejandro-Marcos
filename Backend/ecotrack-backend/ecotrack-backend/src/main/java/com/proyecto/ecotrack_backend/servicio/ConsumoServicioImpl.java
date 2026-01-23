@@ -1,5 +1,6 @@
 package com.proyecto.ecotrack_backend.servicio;
 
+import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.proyecto.ecotrack_backend.dto.ConsumoDto;
 import com.proyecto.ecotrack_backend.modelos.Consumo;
 import com.proyecto.ecotrack_backend.modelos.Usuario;
@@ -7,6 +8,8 @@ import com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio;
 import com.proyecto.ecotrack_backend.repositorio.UsuarioRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -71,5 +74,77 @@ public class ConsumoServicioImpl implements ConsumoServicio{
         consumo.setNotas(consumoDto.getNotas());
 
         return consumoRepo.save(consumo);
+    }
+
+    @Override
+    public byte[] generarPdf(Integer id) {
+
+        List<Consumo> consumos = obtenerConsumosPorUsuario(id);
+
+        try(ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()){
+
+            String html = generarHtml(consumos);
+
+            PdfRendererBuilder builder = new PdfRendererBuilder();
+
+            builder.withHtmlContent(html, null);
+            builder.toStream(byteArrayOutputStream);
+            builder.run();
+
+            return byteArrayOutputStream.toByteArray();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String generarHtml(List<Consumo> consumos) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("""
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; }
+                h1 { text-align: center; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #333; padding: 8px; }
+                th { background-color: #f2f2f2; }
+            </style>
+        </head>
+        <body>
+            <h1>Listado de Consumos</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>CATEGORIA</th>
+                        <th>UNIDAD</th>
+                        <th>CANTIDAD</th>
+                        <th>FECHA</th>
+                        <th>NOTAS</th>
+                    </tr>
+                </thead>
+                <tbody>
+    """);
+
+        for (Consumo consumo : consumos) {
+            sb.append("<tr>")
+                    .append("<td>").append(consumo.getCategoria()).append("</td>")
+                    .append("<td>").append(consumo.getUnidad()).append("</td>")
+                    .append("<td>").append(consumo.getCantidad()).append("</td>")
+                    .append("<td>").append(consumo.getFecha()).append("</td>")
+                    .append("<td>").append(consumo.getNotas()).append("</td>")
+                    .append("</tr>");
+        }
+
+        sb.append("""
+                </tbody>
+            </table>
+        </body>
+        </html>
+    """);
+
+        return sb.toString();
     }
 }
