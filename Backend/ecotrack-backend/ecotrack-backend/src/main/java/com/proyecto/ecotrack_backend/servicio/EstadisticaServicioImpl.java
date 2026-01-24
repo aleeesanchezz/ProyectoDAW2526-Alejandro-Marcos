@@ -5,6 +5,7 @@ import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @Service
 public class EstadisticaServicioImpl implements EstadisticaServicio{
@@ -27,4 +28,6 @@ public class EstadisticaServicioImpl implements EstadisticaServicio{
 
         return consumoRepositorio.obtenerTotalCo2PorPeriodo(idUsuario, inicioMesAnterior, finMesAnterior);
     }
+
+
 }

@@ -122,6 +122,7 @@ public class ConsumoServicioImpl implements ConsumoServicio{
                         <th>UNIDAD</th>
                         <th>CANTIDAD</th>
                         <th>FECHA</th>
+                        <th>CO2</th>
                         <th>NOTAS</th>
                     </tr>
                 </thead>
@@ -134,6 +135,7 @@ public class ConsumoServicioImpl implements ConsumoServicio{
                     .append("<td>").append(consumo.getUnidad()).append("</td>")
                     .append("<td>").append(consumo.getCantidad()).append("</td>")
                     .append("<td>").append(consumo.getFecha()).append("</td>")
+                    .append("<td>").append(consumo.getCo2()).append("</td>")
                     .append("<td>").append(consumo.getNotas()).append("</td>")
                     .append("</tr>");
         }

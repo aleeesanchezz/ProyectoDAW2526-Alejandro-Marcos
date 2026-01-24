@@ -10,7 +10,7 @@
 
     <form (ngSubmit)="registrarConsumo()" #form="ngForm">
         Categoria*
-        <select class="form-select" [(ngModel)]="categoria" (change)="validarUnidad()" name="categoria" aria-label="Default select example" required #cat="ngModel">
+        <select class="form-select" [(ngModel)]="categoria" (change)="aplicarUnidad()" name="categoria" aria-label="Default select example" required #cat="ngModel">
             <option selected value="" disabled>Categoría</option>
             <option value="AGUA">Agua</option>
             <option value="ELECTRICIDAD">Electricidad</option>
@@ -32,10 +32,10 @@
                 Este campo es obligatorio
             </div>
 
-            <div *ngIf="!unidadCorrecta && unidad && categoria">
-              <span style="color: red;">
-                Unidad incorrecta, m³ para agua y gas y kWh para electricidad
-              </span>
+            <div>
+                <span *ngIf="!unidadCorrecta && unidad && categoria" style="color: red;">
+                    Unidad incorrecta, m³ para agua y gas y kWh para electricidad
+                </span>
             </div>
 
         </div>

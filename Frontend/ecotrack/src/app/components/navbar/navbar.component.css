@@ -11,6 +11,11 @@
   padding: 0 1rem;
 }
 
+.navbar-logo {
+  width: 225px;
+  height: auto;
+}
+
 .navbar-title {
   position: absolute;
   left: 50%;
@@ -71,6 +76,30 @@
     padding: 0 0.75rem;
   }
 
+  .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-toggler {
+    order: 1;
+    margin-right: 0;
+  }
+
+  .navbar-logo {
+    width: 120px;
+    order: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .user-section {
+    order: 3;
+    margin-left: auto;
+  }
+
   .navbar-title {
     position: static;
     transform: none;
@@ -86,6 +115,7 @@
     background: linear-gradient(135deg, #F5F5F5 0%, #E8F5E9 100%);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     padding: 0.75rem 1rem 1rem;
+    order: 4;
   }
 
   .navbar-nav .nav-link {

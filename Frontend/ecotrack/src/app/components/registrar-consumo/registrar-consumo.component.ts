@@ -20,11 +20,12 @@ export class RegistrarConsumoComponent implements OnInit{
   co2: number = 0;
   notas: string = '';
 
+  unidadCorrecta: boolean = false;
+
   anios: number[] = [];
   anio!: number;
   mes!: number;
 
-  unidadCorrecta: boolean = false;
   mensaje: string = '';
 
   constructor(private consumoService: ConsumoService, private authService: AuthServiceService){}
@@ -69,6 +70,8 @@ export class RegistrarConsumoComponent implements OnInit{
   }
 
    registrarConsumo(){
+
+
     this.co2 = this.calcularCo2();
 
     const usuarioActual = this.authService.getUsuario();
@@ -103,18 +106,29 @@ export class RegistrarConsumoComponent implements OnInit{
     }
   }
 
-  validarUnidad(): boolean {
 
-    if ((this.categoria === Categoria.AGUA || this.categoria === Categoria.GAS) && this.unidad === Unidad.M3) {
-        this.unidadCorrecta = true;
-    } else if (this.categoria === Categoria.ELECTRICIDAD && this.unidad === Unidad.KWH) {
-        this.unidadCorrecta = true;
-    } else {
-        this.unidadCorrecta = false;
-    }
+  aplicarUnidad(){
+    if(this.categoria === Categoria.AGUA || this.categoria === Categoria.GAS){
+      this.unidad = Unidad.M3;
+      this.unidadCorrecta = true;
+    
+    } else if(this.categoria === Categoria.ELECTRICIDAD){
+      this.unidad = Unidad.KWH;
+      this.unidadCorrecta = true;
+    } 
 
-    return this.unidadCorrecta;
   }
+
+  validarUnidad(){
+    if((this.categoria === Categoria.AGUA || this.categoria === Categoria.GAS) && this.unidad === Unidad.M3){
+      this.unidadCorrecta = true;
+  } else if(this.categoria === Categoria.ELECTRICIDAD && this.unidad === Unidad.KWH){
+    this.unidadCorrecta = true;
+  } else{
+    this.unidadCorrecta = false;
+  }
+  return this.unidadCorrecta
+}
 
 
 

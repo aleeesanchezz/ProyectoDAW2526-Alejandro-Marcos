@@ -7,7 +7,7 @@
     <h2>Modificar consumo</h2>
     <form (ngSubmit)="modificarConsumo()" #form="ngForm">
         Categoria*
-        <select class="form-select" [(ngModel)]="categoria" (change)="validarUnidad()" name="categoria" aria-label="Default select example" required #cat="ngModel">
+        <select class="form-select" [(ngModel)]="categoria" (change)="aplicarUnidad()" name="categoria" aria-label="Default select example" required #cat="ngModel">
             <option selected value="" disabled>Categoria</option>
             <option value="AGUA">Agua</option>
             <option value="ELECTRICIDAD">Electricidad</option>

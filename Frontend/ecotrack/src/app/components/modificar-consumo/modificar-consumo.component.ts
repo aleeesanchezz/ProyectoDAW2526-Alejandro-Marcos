@@ -64,7 +64,7 @@ export class ModificarConsumoComponent implements OnInit, OnDestroy{
         this.anio = parseInt(fechaParts[0]);
         this.mes = parseInt(fechaParts[1]);
         
-        this.validarUnidad();
+        this.validarUnidad()
       }
 
     } else{
@@ -82,18 +82,26 @@ export class ModificarConsumoComponent implements OnInit, OnDestroy{
       }
     }
   
-    validarUnidad(): boolean {
-  
-      if ((this.categoria === Categoria.AGUA || this.categoria === Categoria.GAS) && this.unidad === Unidad.M3) {
-          this.unidadCorrecta = true;
-      } else if (this.categoria === Categoria.ELECTRICIDAD && this.unidad === Unidad.KWH) {
-          this.unidadCorrecta = true;
-      } else {
-          this.unidadCorrecta = false;
-      }
-  
-      return this.unidadCorrecta;
-    }
+    aplicarUnidad(){
+    if(this.categoria === Categoria.AGUA || this.categoria === Categoria.GAS){
+      this.unidad = Unidad.M3;
+    
+    } else if(this.categoria === Categoria.ELECTRICIDAD){
+      this.unidad = Unidad.KWH;
+    } 
+
+  }
+
+  validarUnidad(){
+    if((this.categoria === Categoria.AGUA || this.categoria === Categoria.GAS) && this.unidad === Unidad.M3){
+      this.unidadCorrecta = true;
+  } else if(this.categoria === Categoria.ELECTRICIDAD && this.unidad === Unidad.KWH){
+    this.unidadCorrecta = true;
+  } else{
+    this.unidadCorrecta = false;
+  }
+  return this.unidadCorrecta
+}
 
     calcularCo2(){
 
