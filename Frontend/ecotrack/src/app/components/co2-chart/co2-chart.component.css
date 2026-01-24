@@ -6,29 +6,43 @@
   padding: 0;
   background-color: transparent;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .graph-wrapper {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Estilos para ApexCharts en responsive */
+:host ::ng-deep .apexcharts-canvas {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+:host ::ng-deep .apexcharts-svg {
+  width: 100% !important;
+  height: auto !important;
 }
 
 @media (max-width: 480px) {
   .chart-container {
     min-height: 280px;
+    padding: 0 -1rem;
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .chart-container {
-    min-height: 300px;
+    min-height: 320px;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .chart-container {
-    min-height: 350px;
+    min-height: 380px;
   }
 }
 

@@ -94,6 +94,7 @@ export class Co2ChartComponent implements OnInit, OnDestroy {
       chart: {
         type: "bar",
         height: this.chartHeight,
+        width: "100%",
         toolbar: { 
           show: false
         }

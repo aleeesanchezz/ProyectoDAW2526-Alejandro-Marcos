@@ -21,12 +21,15 @@ export class ModificarConsumoComponent implements OnInit, OnDestroy{
   co2: number = 0;
   notas: string = '';
 
+  anios: number[] = [];
+  anio!: number;
+  mes!: number;
+
   unidadCorrecta: boolean = false;
   mensaje: string = '';
   error: string = '';
 
   consumoActual: Consumo | null = null;
-  fechaInvalida: boolean = false;
 
 
   constructor(private router: Router, private authService: AuthServiceService, private consumoService: ConsumoService){}
@@ -39,11 +42,30 @@ export class ModificarConsumoComponent implements OnInit, OnDestroy{
       this.authService.redirigirLogin();
     }
 
+    const anioActual = new Date().getFullYear();
+
+    for (let i = 0; i <= 5; i++) {
+      this.anios.push(anioActual - i);
+    }
+
     const consumoGuardado = localStorage.getItem('consumoActual');
 
     if(consumoGuardado){
       this.consumoActual = JSON.parse(consumoGuardado);
       console.log(this.consumoActual);
+      
+      if(this.consumoActual){
+        this.categoria = this.consumoActual.categoria;
+        this.cantidad = this.consumoActual.cantidad;
+        this.unidad = this.consumoActual.unidad;
+        this.notas = this.consumoActual.notas || '';
+        
+        const fechaParts = this.consumoActual.fecha.split('-');
+        this.anio = parseInt(fechaParts[0]);
+        this.mes = parseInt(fechaParts[1]);
+        
+        this.validarUnidad();
+      }
 
     } else{
       this.router.navigate(['historial-consumo']);
@@ -106,13 +128,15 @@ export class ModificarConsumoComponent implements OnInit, OnDestroy{
 
     this.co2 = this.calcularCo2();
 
+    const fechaModificada = `${this.anio}-${String(this.mes).padStart(2, '0')}-01`;
+
     let consumoModificado = new Consumo(
       this.consumoActual.id,
       this.consumoActual.usuarioId,
       this.categoria as Categoria,
       this.cantidad,
       this.unidad as Unidad,
-      this.fecha,
+      fechaModificada,
       this.co2,
       this.notas
     )
@@ -130,20 +154,14 @@ export class ModificarConsumoComponent implements OnInit, OnDestroy{
     });
   }
 
-    comprobarFecha(){
 
-    const fechaActual: Date = new Date();
-    if(this.fecha > fechaActual.toISOString().split('T')[0]){
-      this.fecha = fechaActual.toISOString().split('T')[0];
-      this.fechaInvalida = true;
-    }
-  }
 
   limpiar(){
     this.categoria = '';
     this.cantidad = 0;
     this.unidad = '';
-    this.fecha = '';
+    this.anio = new Date().getFullYear();
+    this.mes = new Date().getMonth() + 1;
     this.notas = '';
   }
 

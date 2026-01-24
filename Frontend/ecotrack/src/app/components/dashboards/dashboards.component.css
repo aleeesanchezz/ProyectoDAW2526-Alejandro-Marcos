@@ -12,6 +12,8 @@
   width: 100%;
   max-width: 1200px;
   min-height: 550px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .chart-section {
@@ -19,6 +21,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .chart-title {
@@ -58,11 +62,12 @@
   transform: translateY(0);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .dashboard {
-    width: 90%;
-    min-height: 300px;
-    padding: 1.5rem;
+    width: 95%;
+    min-height: auto;
+    padding: 1rem;
+    margin: 1.5rem auto;
   }
   
   .chart-title {
@@ -83,9 +88,27 @@
   .btn-text {
     display: none;
   }
+}
 
-  div{
-    width: 390px;
-    height: 220px;
+@media (min-width: 481px) and (max-width: 768px) {
+  .dashboard {
+    width: 90%;
+    min-height: auto;
+    padding: 1.5rem;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+  }
+  
+  .download-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+    margin: 0 0 15px 0;
+  }
+  
+  .btn-text {
+    display: inline;
   }
 }
