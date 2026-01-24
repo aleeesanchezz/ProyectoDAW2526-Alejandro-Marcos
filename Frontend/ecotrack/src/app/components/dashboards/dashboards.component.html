@@ -1,0 +1,10 @@
+<div class="dashboard">
+  <div class="chart-section">
+    <h3 class="chart-title">CO2 Generado Mensual</h3>
+    <button class="download-btn" (click)="descargarPNG()" title="Descargar PNG" type="button">
+      <i class="bi bi-download"></i> 
+      <span class="btn-text">Descargar PNG</span>
+    </button>
+    <app-co2-chart #co2Chart></app-co2-chart>
+  </div>
+</div>
