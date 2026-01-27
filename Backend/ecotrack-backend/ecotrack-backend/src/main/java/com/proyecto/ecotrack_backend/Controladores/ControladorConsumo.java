@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/consumos")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControladorConsumo {
 
     private final ConsumoServicio consumoServicio;
@@ -44,7 +43,6 @@ public class ControladorConsumo {
         return consumoServicio.actualizarConsumo(consumoDto);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/generar-pdf/{id}")
     public ResponseEntity<byte[]> esportarPdf(@PathVariable Integer id){
         List<Consumo> consumos = consumoServicio.obtenerConsumosPorUsuario(id);

@@ -8,7 +8,7 @@ import { Consumo } from '../entidades/consumo';
 })
 export class ConsumoService {
   
-  private api: string = 'http://localhost:8080/api/consumos';
+  private api: string = '/api/consumos';
 
   constructor(private http: HttpClient) { }
 

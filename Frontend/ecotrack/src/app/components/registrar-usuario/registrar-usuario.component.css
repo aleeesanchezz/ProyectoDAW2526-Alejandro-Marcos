@@ -35,9 +35,7 @@ main{
     gap: 2rem;
 }
 
-h1{
-    font-weight: bold;
-    color: white;
+img{
     margin-top: 3rem;
     position: absolute;
     top: 0;

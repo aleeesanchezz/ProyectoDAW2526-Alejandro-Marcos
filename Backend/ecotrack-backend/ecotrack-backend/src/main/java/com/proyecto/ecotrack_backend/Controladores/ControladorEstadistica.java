@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/estadisticas")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ControladorEstadistica {
 
     private final EstadisticaServicioImpl estadisticaServicio;

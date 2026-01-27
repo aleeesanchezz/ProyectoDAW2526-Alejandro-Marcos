@@ -12,7 +12,8 @@
         <span>¡Todavia no tienes cosumos registrados!</span>
         <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarConsumo()"></button>
     </div>
-    <table *ngIf="consumos.length >= 1" class="table">
+    <div *ngIf="consumos.length >= 1" class="table-responsive">
+      <table class="table">
         <thead>
             <tr>
                 <th scope="col">Categoria</th>
@@ -50,7 +51,8 @@
                 </button></td>
             </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
 
     <div *ngIf="modalEliminar" class="card-body" id="modal-eliminar">
       <p class="card-text">¿Estás seguro de que quieres eliminar este consumo?</p>

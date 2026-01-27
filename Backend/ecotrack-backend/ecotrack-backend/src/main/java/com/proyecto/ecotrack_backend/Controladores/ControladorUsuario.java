@@ -9,6 +9,7 @@ import com.proyecto.ecotrack_backend.repositorio.PasswordResetTokenRepository;
 import com.proyecto.ecotrack_backend.repositorio.UsuarioRepositorio;
 import com.proyecto.ecotrack_backend.servicio.EmailService;
 import com.proyecto.ecotrack_backend.servicio.UsuarioServicio;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RestController //Exponer servicios
 @RequestMapping("/api/usuarios") //Identificacion de la API
-@CrossOrigin(origins = "http://localhost:4200") //CORS
 public class ControladorUsuario {
 
     private final UsuarioServicio usuarioServicio;
@@ -30,6 +30,9 @@ public class ControladorUsuario {
     private final PasswordResetTokenRepository tokenRepository;
     private final PasswordEncoder codificarPassword;
     private final UsuarioRepositorio usuarioRepo;
+    
+    @Value("${frontend.url:http://localhost:4200}")
+    private String frontendUrl;
 
     private static int codigoVerificacion;
 
@@ -105,7 +108,7 @@ public class ControladorUsuario {
         // Crea el codigo aleatorio de 5 digitos
         int codigo = ThreadLocalRandom.current().nextInt(10000, 100000);
 
-        String enlace = "http://localhost:4200/verificar-codigo";
+        String enlace = frontendUrl + "/verificar-codigo";
 
         emailServicio.enviarCorreo(usuario.getEmail(), "Codigo de verificación EcoTrack", "Este es su código de verificación para iniciar" + "\n" +
                 "sesión en Ecotrack: " + codigo + ", por favor, acceda al siguiente enlace para continuar con el registro " + enlace);
@@ -117,7 +120,6 @@ public class ControladorUsuario {
     }
 
     @PostMapping("/comprobar-codigo")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<?> comprobarCodigo(@RequestBody Map<String, Integer> payload){
 
         Integer codigo = payload.get("codigo");
@@ -131,7 +133,6 @@ public class ControladorUsuario {
     }
 
     @PostMapping("/olvidar-password")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<?> olvidarPassword(@RequestBody String email){
 
         Usuario usuario = null;
@@ -155,7 +156,7 @@ public class ControladorUsuario {
         usuarioServicio.guardarToken(passwordResetToken);
 
         // Enlace que llevara al reseteo de contraseña
-        String enlace = "http://localhost:4200/reiniciar-password?token=" + token;
+        String enlace = frontendUrl + "/reiniciar-password?token=" + token;
 
         emailServicio.enviarCorreo(usuario.getEmail(), "Recuperar contraseña", "Pulse aquí para recuperar tu contraseña:\n" + enlace);
 
