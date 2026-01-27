@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>DOCUMENTACIÓN COMPLETA ECOTRACK TFG</title>
+<style>
+body { font-family: Calibri, Arial, sans-serif; margin: 2cm; line-height: 1.5; }
+h1 { font-size: 28pt; color: #2c3e50; border-bottom: 3px solid #3498db; padding: 10px 0; }
+h2 { font-size: 20pt; color: #34495e; margin-top: 30px; border-left: 4px solid #3498db; padding-left: 10px; }
+h3 { font-size: 14pt; color: #7f8c8d; margin-top: 15px; }
+p { text-align: justify; margin: 10px 0; }
+table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+th { background-color: #3498db; color: white; padding: 10px; text-align: left; }
+td { padding: 8px; border-bottom: 1px solid #ddd; }
+pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow: auto; }
+code { background-color: #f4f4f4; padding: 2px 4px; font-family: monospace; }
+.highlight { background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1>📚 DOCUMENTACIÓN COMPLETA DEL PROYECTO ECOTRACK</h1>
+<p><em>Trabajo de Fin de Grado - 2º Desarrollo de Aplicaciones Web</em></p>
+
+<div class="highlight">
+<p><strong>Autores:</strong> Alejandro Sánchez Olivera, Marcos Blasco Serrano<br/>
+<strong>Curso:</strong> 2º DAW<br/>
+<strong>Fecha:</strong> Noviembre 2025<br/>
+<strong>Versión:</strong> 1.0 - Documentación para Defensa del TFG</p>
+</div>
+
+<h2>📋 TABLA DE CONTENIDOS</h2>
+<ol>
+<li>Resumen Ejecutivo</li>
+<li>Descripción del Proyecto</li>
+<li>Requisitos Funcionales</li>
+<li>Arquitectura General</li>
+<li>Base de Datos</li>
+<li>Backend - Spring Boot</li>
+<li>Frontend - Angular</li>
+<li>Flujos y Rutas</li>
+<li>Seguridad y Autenticación</li>
+<li>Despliegue con Docker</li>
+<li>Glosario Técnico</li>
+</ol>
+
+<br/><br/>
+
+<h2>1. RESUMEN EJECUTIVO</h2>
+
+<h3>¿Qué es EcoTrack?</h3>
+<p>EcoTrack es una <strong>aplicación web para gestión de consumos energéticos y cálculo de huella de carbono</strong>. Permite a los usuarios registrar sus consumos de agua, luz y gas, calcular automáticamente el CO₂ generado, visualizar estadísticas mensuales y establecer objetivos de reducción.</p>
+
+<h3>Objetivos del Proyecto</h3>
+<ul>
+<li>✅ Facilitar el registro y seguimiento de consumos energéticos</li>
+<li>✅ Calcular automáticamente la huella de carbono</li>
+<li>✅ Mostrar visualizaciones gráficas de datos</li>
+<li>✅ Permitir establecer y monitorear objetivos de reducción</li>
+<li>✅ Ser escalable y seguro en producción</li>
+<li>✅ Ser amigable e intuitivo para el usuario final</li>
+</ul>
+
+<h3>Tecnologías Principales</h3>
+<table>
+<tr><th>Capa</th><th>Tecnología</th></tr>
+<tr><td><strong>Frontend</strong></td><td>Angular 16 + TypeScript + Chart.js</td></tr>
+<tr><td><strong>Backend</strong></td><td>Spring Boot 3.3.5 + Java 21 + JPA</td></tr>
+<tr><td><strong>Base de Datos</strong></td><td>MySQL 8.0 + InnoDB</td></tr>
+<tr><td><strong>Despliegue</strong></td><td>Docker + Docker Compose + Caddy</td></tr>
+<tr><td><strong>Proxy Inverso</strong></td><td>Caddy (HTTPS automático)</td></tr>
+</table>
+
+<br/><br/>
+
+<h2>2. DESCRIPCIÓN DEL PROYECTO</h2>
+
+<h3>2.1 Contexto y Justificación</h3>
+<p>En la era del cambio climático, es fundamental que los individuos conozcan y reduzcan su huella de carbono. EcoTrack surge como solución educativa y práctica para sensibilizar a los usuarios sobre su consumo energético.</p>
+
+<h3>2.2 Alcance del Proyecto</h3>
+<p><strong>Dentro del Alcance:</strong></p>
+<ul>
+<li>Registro y autenticación de usuarios</li>
+<li>CRUD de consumos energéticos</li>
+<li>Cálculo automático de CO₂</li>
+<li>Dashboards con gráficos</li>
+<li>Recuperación de contraseña por email</li>
+<li>Exportación de datos a PDF</li>
+<li>Objetivo de reducción de consumo</li>
+</ul>
+
+<p><strong>Fuera del Alcance:</strong></p>
+<ul>
+<li>Integración con proveedores de servicios</li>
+<li>Medición automática de consumos</li>
+<li>Análisis predictivo avanzado</li>
+<li>App móvil</li>
+</ul>
+
+<br/><br/>
+
+<h2>3. REQUISITOS FUNCIONALES</h2>
+
+<h3>3.1 Módulo de Autenticación</h3>
+
+<p><strong>REQ-01: Sistema de Registro</strong></p>
+<ul>
+<li>Validar campos requeridos</li>
+<li>Verificar unicidad de usuario y email</li>
+<li>Cifrar contraseña con bcrypt</li>
+<li>Guardar en BD</li>
+</ul>
+
+<p><strong>REQ-02: Sistema de Login</strong></p>
+<ul>
+<li>Validar credenciales</li>
+<li>Crear sesión/token</li>
+<li>Redirigir a inicio</li>
+<li>Mantener sesión activa</li>
+</ul>
+
+<p><strong>REQ-03: Recuperación de Contraseña</strong></p>
+<ul>
+<li>Generar código temporal</li>
+<li>Enviar por email</li>
+<li>Validar código</li>
+<li>Permitir cambio de contraseña</li>
+</ul>
+
+<p><strong>REQ-04: Logout</strong></p>
+<ul>
+<li>Cerrar sesión</li>
+<li>Limpiar datos locales</li>
+<li>Redirigir a login</li>
+</ul>
+
+<h3>3.2 Módulo de Consumos</h3>
+
+<p><strong>REQ-05: Registrar Consumo</strong></p>
+<ul>
+<li>Formulario con 5 campos obligatorios</li>
+<li>Validar datos</li>
+<li>Calcular CO₂ = cantidad × factor</li>
+<li>Guardar en BD</li>
+</ul>
+
+<p><strong>REQ-06: Listar Consumos</strong></p>
+<ul>
+<li>Obtener todos los consumos del usuario</li>
+<li>Implementar paginación (20 registros/página)</li>
+<li>Permitir filtros por categoría y fecha</li>
+<li>Mostrar en tabla ordenable</li>
+</ul>
+
+<p><strong>REQ-07: Modificar Consumo</strong></p>
+<ul>
+<li>Cargar datos en formulario</li>
+<li>Permitir edición</li>
+<li>Validar cambios</li>
+<li>Recalcular CO₂</li>
+</ul>
+
+<p><strong>REQ-08: Eliminar Consumo</strong></p>
+<ul>
+<li>Solicitar confirmación</li>
+<li>Eliminar de BD</li>
+<li>Actualizar estadísticas</li>
+<li>Mostrar confirmación</li>
+</ul>
+
+<h3>3.3 Módulo de Estadísticas</h3>
+
+<p><strong>REQ-09: Dashboard Principal</strong></p>
+<ul>
+<li>Calcular CO₂ del mes actual</li>
+<li>Mostrar gráfico circular (categorías)</li>
+<li>Mostrar gráfico línea (últimos 6 meses)</li>
+<li>Mostrar total de consumos</li>
+</ul>
+
+<p><strong>REQ-10: Gráficos Interactivos</strong></p>
+<ul>
+<li>Implementar Chart.js</li>
+<li>Actualizar dinámicamente</li>
+<li>Responsivos en móvil</li>
+<li>Mostrar leyendas y valores</li>
+</ul>
+
+<h3>3.4 Requisitos No Funcionales</h3>
+
+<p><strong>RNF-01: Rendimiento</strong> - Cargas deben completarse en &lt; 2 segundos, máximo 100ms de latencia en API</p>
+
+<p><strong>RNF-02: Disponibilidad</strong> - 99.5% uptime, recuperación automática de fallos</p>
+
+<p><strong>RNF-03: Seguridad</strong> - HTTPS obligatorio, contraseñas cifradas, validación doble, protección CSRF</p>
+
+<p><strong>RNF-04: Escalabilidad</strong> - Soportar 1000 usuarios simultáneos, BD indexada, caché en memoria</p>
+
+<p><strong>RNF-05: Usabilidad</strong> - Interfaz intuitiva, responsive design, mensajes claros, guías de ayuda</p>
+
+<br/><br/>
+
+<h2>4. ARQUITECTURA GENERAL</h2>
+
+<h3>Diagrama de Arquitectura</h3>
+
+<pre>
+┌─────────────────────────────────────────────────────────────┐
+│                    CLIENTE - NAVEGADOR                       │
+│              (Angular 16 SPA - TypeScript)                   │
+└─────────────────────────┬───────────────────────────────────┘
+                          │ HTTPS
+                          │ REST API
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│            PROXY INVERSO (CADDY)                             │
+│   - Certificados SSL automático                              │
+│   - Enrutamiento /api → Backend                              │
+│   - Enrutamiento / → Frontend                                │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+            ┌─────────────┴─────────────┐
+            ▼                           ▼
+┌──────────────────────────┐  ┌─────────────────────────────┐
+│   BACKEND (Spring Boot)  │  │  FRONTEND (Nginx + Angular) │
+│  - REST Controllers      │  │  - Rutas SPA               │
+│  - Servicios             │  │  - Componentes             │
+│  - Repositorios (JPA)    │  │  - Servicios HTTP          │
+│  - Lógica de negocio     │  │  - Gráficos (Chart.js)     │
+└──────────────┬───────────┘  └─────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────────────────────────┐
+│           BASE DE DATOS (MySQL 8.0)                      │
+│  ┌───────────┐  ┌──────────┐  ┌──────────┐              │
+│  │  USUARIO  │  │ CONSUMO  │  │CATEGORIA │ ...          │
+│  └───────────┘  └──────────┘  └──────────┘              │
+└──────────────────────────────────────────────────────────┘
+</pre>
+
+<br/><br/>
+
+<h2>5. BASE DE DATOS</h2>
+
+<h3>5.1 Modelo Entidad-Relación</h3>
+
+<pre>
+┌─────────────┐         ┌────────────┐         ┌──────────┐
+│   USUARIO   │         │  CONSUMO   │         │CATEGORIA │
+├─────────────┤   1:N   ├────────────┤   N:1   ├──────────┤
+│ id (PK)     │◄────────│ id (PK)    │────────►│ id (PK)  │
+│ nombre      │         │ id_usuario │         │ nombre   │
+│ apellidos   │         │ categoria  │         │ factor   │
+│ username*   │         │ cantidad   │         │          │
+│ password    │         │ unidad     │         │          │
+│ email*      │         │ fecha      │         │          │
+└─────────────┘         │ co2        │         └──────────┘
+       │                │ notas      │
+       │                └────────────┘
+       │
+       │                ┌──────────────────┐
+       │         1:N    │OBJETIVO_REDUCCION│
+       └───────────────►├──────────────────┤
+                        │ id (PK)          │
+                        │ id_usuario (FK)  │
+                        │ categoria        │
+                        │ % reduccion      │
+                        │ fecha_limite     │
+                        │ estado           │
+                        └──────────────────┘
+
+* UNIQUE
+FK = Foreign Key
+</pre>
+
+<h3>5.2 Tabla: USUARIO</h3>
+
+<p><strong>Descripción:</strong> Almacena los datos de los usuarios registrados en la aplicación.</p>
+
+<table>
+<tr><th>Campo</th><th>Tipo</th><th>Nulo</th><th>Clave</th><th>Descripción</th></tr>
+<tr><td>id</td><td>INT UNSIGNED</td><td>NO</td><td>PK</td><td>Identificador único</td></tr>
+<tr><td>nombre</td><td>VARCHAR(100)</td><td>NO</td><td>-</td><td>Nombre del usuario</td></tr>
+<tr><td>apellidos</td><td>VARCHAR(100)</td><td>NO</td><td>-</td><td>Apellidos del usuario</td></tr>
+<tr><td>nombre_usuario</td><td>VARCHAR(50)</td><td>NO</td><td>UNIQUE</td><td>Username para login</td></tr>
+<tr><td>password</td><td>VARCHAR(255)</td><td>NO</td><td>-</td><td>Contraseña cifrada (bcrypt)</td></tr>
+<tr><td>email</td><td>VARCHAR(100)</td><td>NO</td><td>UNIQUE</td><td>Email del usuario</td></tr>
+</table>
+
+<h3>5.3 Tabla: CONSUMO</h3>
+
+<p><strong>Descripción:</strong> Registra los consumos energéticos de cada usuario.</p>
+
+<table>
+<tr><th>Campo</th><th>Tipo</th><th>Nulo</th><th>Descripción</th></tr>
+<tr><td>id</td><td>INT</td><td>NO</td><td>Identificador único</td></tr>
+<tr><td>usuario_id</td><td>INT</td><td>NO</td><td>Referencia a usuario</td></tr>
+<tr><td>categoria</td><td>ENUM</td><td>NO</td><td>Agua, Electricidad, Gas</td></tr>
+<tr><td>cantidad</td><td>DECIMAL(10,2)</td><td>NO</td><td>Cantidad consumida</td></tr>
+<tr><td>unidad</td><td>VARCHAR(20)</td><td>NO</td><td>m³, kWh, etc.</td></tr>
+<tr><td>fecha</td><td>DATE</td><td>NO</td><td>Fecha del consumo</td></tr>
+<tr><td>co2</td><td>DOUBLE</td><td>NO</td><td>CO₂ generado en kg</td></tr>
+<tr><td>notas</td><td>TEXT</td><td>SÍ</td><td>Notas adicionales</td></tr>
+</table>
+
+<h3>5.4 Factores de CO₂</h3>
+
+<table>
+<tr><th>Categoría</th><th>Factor</th><th>Unidad</th></tr>
+<tr><td>Agua</td><td>0.0003</td><td>kg CO₂ / litro</td></tr>
+<tr><td>Electricidad</td><td>0.3</td><td>kg CO₂ / kWh</td></tr>
+<tr><td>Gas</td><td>2.0</td><td>kg CO₂ / m³</td></tr>
+</table>
+
+<h3>5.5 Índices para Optimización</h3>
+
+<pre>
+CREATE INDEX idx_consumo_usuario ON consumo(usuario_id);
+CREATE INDEX idx_consumo_fecha ON consumo(fecha);
+CREATE INDEX idx_consumo_categoria ON consumo(categoria);
+CREATE INDEX idx_objetivo_usuario ON objetivo_reduccion(usuario_id);
+</pre>
+
+<br/><br/>
+
+<h2>6. BACKEND - SPRING BOOT</h2>
+
+<h3>6.1 Estructura de Carpetas</h3>
+
+<pre>
+src/main/java/com/proyecto/ecotrack_backend/
+├── EcotrackBackendApplication.java
+├── Controladores/
+│   ├── ControladorUsuario.java
+│   ├── ControladorConsumo.java
+│   ├── ControladorEstadistica.java
+│   └── ControladorObjetivoReduccion.java
+├── modelos/
+│   ├── Usuario.java
+│   ├── Consumo.java
+│   ├── Categoria.java (Enum)
+│   ├── Unidad.java (Enum)
+│   ├── ObjetivoReduccion.java
+│   └── PasswordResetToken.java
+├── repositorio/
+│   ├── UsuarioRepositorio.java
+│   ├── ConsumoRepositorio.java
+│   ├── EstadisticaRepositorio.java
+│   └── PasswordResetTokenRepository.java
+├── servicio/
+│   ├── UsuarioServicio.java
+│   ├── UsuarioServicioImpl.java
+│   ├── ConsumoServicio.java
+│   ├── EmailService.java
+│   └── ...
+├── seguridad/
+│   └── ConfiguracionSeguridad.java
+├── dto/
+│   └── ReiniciarPasswordDto.java
+└── excepciones/
+    ├── EmailExistenteException.java
+    └── NombreUsuarioExistenteException.java
+</pre>
+
+<h3>6.2 Endpoints principales del Backend</h3>
+
+<table>
+<tr><th>Método</th><th>Endpoint</th><th>Descripción</th></tr>
+<tr><td>POST</td><td>/api/usuarios</td><td>Registrar nuevo usuario</td></tr>
+<tr><td>POST</td><td>/api/usuarios/login</td><td>Iniciar sesión</td></tr>
+<tr><td>POST</td><td>/api/usuarios/recuperar-password</td><td>Solicitar recuperación</td></tr>
+<tr><td>GET</td><td>/api/consumos/{id}</td><td>Listar consumos de usuario</td></tr>
+<tr><td>POST</td><td>/api/consumos</td><td>Crear consumo</td></tr>
+<tr><td>PUT</td><td>/api/consumos</td><td>Modificar consumo</td></tr>
+<tr><td>DELETE</td><td>/api/consumos/{id}</td><td>Eliminar consumo</td></tr>
+<tr><td>GET</td><td>/api/estadisticas/{id}</td><td>Obtener estadísticas</td></tr>
+</table>
+
+<h3>6.3 Servicios Principales</h3>
+
+<p><strong>UsuarioServicio:</strong> Gestión de usuarios, validación, cifrado de contraseñas</p>
+
+<p><strong>ConsumoServicio:</strong> CRUD de consumos, cálculo de CO₂, filtrados</p>
+
+<p><strong>EstadisticaServicio:</strong> Cálculo de estadísticas, agregaciones mensuales</p>
+
+<p><strong>EmailService:</strong> Envío de emails (registros, recuperación de contraseña)</p>
+
+<p><strong>ObjetivoReduccionServicio:</strong> Gestión de objetivos de reducción</p>
+
+<h3>6.4 Cálculo de CO₂</h3>
+
+<pre>
+CO₂ generado = cantidad × factor_co2
+
+Ejemplo:
+- Agua: 100 litros × 0.0003 = 0.03 kg CO₂
+- Electricidad: 50 kWh × 0.3 = 15 kg CO₂
+- Gas: 10 m³ × 2.0 = 20 kg CO₂
+</pre>
+
+<br/><br/>
+
+<h2>7. FRONTEND - ANGULAR</h2>
+
+<h3>7.1 Estructura de Componentes</h3>
+
+<p><strong>Componentes de Autenticación:</strong></p>
+<ul>
+<li>LoginComponent - Formulario de login</li>
+<li>RegistrarUsuarioComponent - Formulario de registro</li>
+<li>AyudaPasswordComponent - Solicitud de recuperación</li>
+<li>ReiniciarPasswordComponent - Cambio de contraseña</li>
+<li>VerificarCodigoComponent - Validación de código</li>
+</ul>
+
+<p><strong>Componentes de Consumos:</strong></p>
+<ul>
+<li>RegistrarConsumoComponent - Formulario para nuevo consumo</li>
+<li>HistorialConsumoComponent - Listado con filtros</li>
+<li>ModificarConsumoComponent - Edición de consumo</li>
+</ul>
+
+<p><strong>Componentes de Estadísticas:</strong></p>
+<ul>
+<li>DashboardsComponent - Panel principal</li>
+<li>Co2ChartComponent - Gráficos con Chart.js</li>
+</ul>
+
+<p><strong>Componentes de Objetivos:</strong></p>
+<ul>
+<li>RegistrarObjetivoComponent - Crear objetivo</li>
+<li>ListaObjetivosComponent - Ver objetivos</li>
+</ul>
+
+<p><strong>Componentes Comunes:</strong></p>
+<ul>
+<li>NavbarComponent - Barra de navegación</li>
+<li>FooterComponent - Pie de página</li>
+<li>MenuUsuarioComponent - Menú de usuario</li>
+<li>PaginaPrincipalComponent - Inicio</li>
+</ul>
+
+<h3>7.2 Rutas Principales</h3>
+
+<table>
+<tr><th>Ruta</th><th>Componente</th><th>Descripción</th></tr>
+<tr><td>/</td><td>LoginComponent</td><td>Login</td></tr>
+<tr><td>/usuarios/registrar</td><td>RegistrarUsuarioComponent</td><td>Registro</td></tr>
+<tr><td>/inicio</td><td>PaginaPrincipalComponent</td><td>Dashboard</td></tr>
+<tr><td>/registrar-consumo</td><td>RegistrarConsumoComponent</td><td>Nuevo consumo</td></tr>
+<tr><td>/historial-consumo</td><td>HistorialConsumoComponent</td><td>Historial</td></tr>
+<tr><td>/modificar-consumo</td><td>ModificarConsumoComponent</td><td>Editar consumo</td></tr>
+<tr><td>/registrar-objetivo</td><td>RegistrarObjetivoComponent</td><td>Nuevo objetivo</td></tr>
+<tr><td>/lista-objetivos</td><td>ListaObjetivosComponent</td><td>Ver objetivos</td></tr>
+</table>
+
+<h3>7.3 Servicios Angular</h3>
+
+<p><strong>AuthService:</strong> Gestión de autenticación y almacenamiento de usuario</p>
+
+<p><strong>UsuarioService:</strong> Llamadas HTTP para usuarios (login, registro, cambiar contraseña)</p>
+
+<p><strong>ConsumoService:</strong> CRUD de consumos</p>
+
+<p><strong>EstadisticasService:</strong> Obtener datos para gráficos</p>
+
+<p><strong>ObjetivoReduccionService:</strong> Gestión de objetivos</p>
+
+<h3>7.4 Modelos/Entidades TypeScript</h3>
+
+<p><strong>Usuario:</strong> id, nombre, apellidos, nombreUsuario, password, email</p>
+
+<p><strong>Consumo:</strong> id, usuario_id, categoria, cantidad, unidad, fecha, co2, notas</p>
+
+<p><strong>Categoría:</strong> Enum (Agua, Electricidad, Gas)</p>
+
+<p><strong>ObjetivoReduccion:</strong> id, usuario_id, categoria, porcentaje_reduccion, fecha_limite, estado</p>
+
+<h3>7.5 Gráficos con Chart.js</h3>
+
+<p><strong>Gráfico Circular:</strong> Distribución de CO₂ por categoría</p>
+
+<p><strong>Gráfico de Línea:</strong> Evolución de CO₂ en últimos 6 meses</p>
+
+<br/><br/>
+
+<h2>8. FLUJOS Y RUTAS</h2>
+
+<h3>8.1 Flujo de Registro</h3>
+
+<pre>
+1. Usuario accede a /usuarios/registrar
+2. Completa formulario (nombre, apellidos, username, email, password)
+3. Angular valida datos en cliente
+4. POST /api/usuarios {usuario}
+5. Backend valida (email único?, username único?)
+6. Backend cifra contraseña con bcrypt
+7. Guarda en BD tabla USUARIO
+8. Retorna Usuario creado
+9. Angular muestra confirmación
+10. Redirige a / (Login)
+</pre>
+
+<h3>8.2 Flujo de Autenticación</h3>
+
+<pre>
+1. Usuario accede a / (LoginComponent)
+2. Completa formulario (username, password)
+3. POST /api/usuarios/login {username, password}
+4. Backend busca usuario en tabla USUARIO
+5. Si no existe → error
+6. Si existe, verifica password con bcrypt
+7. Si no coincide → error
+8. Si coincide → retorna datos del Usuario
+9. Angular guarda en localStorage
+10. Redirige a /inicio (Dashboard)
+</pre>
+
+<h3>8.3 Flujo de Registro de Consumo</h3>
+
+<pre>
+1. Usuario autenticado accede a /registrar-consumo
+2. Completa formulario (categoría, cantidad, unidad, fecha, notas)
+3. Angular valida datos
+4. POST /api/consumos {consumo}
+5. Backend calcula CO₂: cantidad × factor
+6. Guarda en tabla CONSUMO
+7. Retorna Consumo creado
+8. Angular muestra confirmación
+9. Redirige a /historial-consumo
+</pre>
+
+<h3>8.4 Flujo del Dashboard</h3>
+
+<pre>
+1. Usuario accede a /inicio
+2. Angular obtiene ID del usuario
+3. GET /api/estadisticas/{usuarioId}
+4. Backend calcula:
+   - CO₂ total del mes actual
+   - CO₂ por categoría
+   - CO₂ últimos 6 meses
+5. Retorna EstadisticasDTO
+6. Angular inicializa gráficos con Chart.js
+7. Se muestra dashboard con métricas y gráficos
+</pre>
+
+<br/><br/>
+
+<h2>9. SEGURIDAD Y AUTENTICACIÓN</h2>
+
+<h3>9.1 Medidas de Seguridad Implementadas</h3>
+
+<ol>
+<li><strong>Cifrado de Contraseñas:</strong> BCrypt con salt automático</li>
+<li><strong>Validación Doble:</strong> Cliente + Servidor</li>
+<li><strong>Protección CORS:</strong> Whitelist de dominios permitidos</li>
+<li><strong>Unicidad de Email y Username:</strong> Restricciones en BD</li>
+<li><strong>Tokens de Recuperación Temporal:</strong> Expiran en 15 minutos</li>
+<li><strong>HTTPS Obligatorio:</strong> Configurado en Caddy</li>
+<li><strong>Variables de Entorno Sensibles:</strong> Almacenadas en .env</li>
+<li><strong>Guards de Autenticación:</strong> En rutas protegidas</li>
+<li><strong>Almacenamiento Seguro:</strong> localStorage con clave de usuario</li>
+</ol>
+
+<h3>9.2 Ejemplo de Cifrado de Contraseña</h3>
+
+<pre>
+// Registrar usuario
+PasswordEncoder encoder = new BCryptPasswordEncoder();
+String passwordCifrada = encoder.encode("miPassword123");
+// Resultado: $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3...
+
+// Verificar contraseña al login
+boolean esValida = encoder.matches("miPassword123", passwordCifrada);
+// Retorna: true
+</pre>
+
+<h3>9.3 Configuración CORS</h3>
+
+<pre>
+registry.addMapping("/api/**")
+    .allowedOrigins("https://tu-dominio.duckdns.org")
+    .allowedMethods("GET", "POST", "PUT", "DELETE")
+    .allowCredentials(true)
+    .maxAge(3600);
+</pre>
+
+<br/><br/>
+
+<h2>10. DESPLIEGUE CON DOCKER</h2>
+
+<h3>10.1 Componentes del Despliegue</h3>
+
+<p><strong>4 contenedores principales:</strong></p>
+
+<ol>
+<li><strong>MySQL:</strong> Base de datos (puerto 3306)</li>
+<li><strong>Backend (Spring Boot):</strong> API REST (puerto 8080)</li>
+<li><strong>Frontend (Nginx):</strong> Aplicación web (puerto 80)</li>
+<li><strong>Caddy:</strong> Proxy inverso HTTPS (puertos 80, 443)</li>
+</ol>
+
+<h3>10.2 Archivo docker-compose.yml</h3>
+
+<p>Define la orquestación de todos los servicios con variables de entorno, volúmenes, healthchecks, y networking.</p>
+
+<h3>10.3 Pasos de Despliegue</h3>
+
+<ol>
+<li>Preparar archivo .env con variables</li>
+<li>Ejecutar <code>docker-compose build</code></li>
+<li>Ejecutar <code>docker-compose up -d</code></li>
+<li>Esperar a que servicios estén listos</li>
+<li>Acceder a https://tu-dominio.duckdns.org</li>
+</ol>
+
+<h3>10.4 Comandos Útiles</h3>
+
+<pre>
+# Ver estado de contenedores
+docker-compose ps
+
+# Ver logs en tiempo real
+docker-compose logs -f
+
+# Detener servicios
+docker-compose down
+
+# Reconstruir imágenes
+docker-compose build --no-cache
+
+# Backup de base de datos
+docker-compose exec mysql mysqldump -u root -p ecotrack > backup.sql
+</pre>
+
+<br/><br/>
+
+<h2>11. GLOSARIO TÉCNICO</h2>
+
+<table>
+<tr><th>Término</th><th>Definición</th></tr>
+<tr><td>ACID</td><td>Atomicidad, Consistencia, Aislamiento, Durabilidad (propiedades de BD)</td></tr>
+<tr><td>API REST</td><td>Interfaz que permite comunicación HTTP entre cliente y servidor</td></tr>
+<tr><td>BCrypt</td><td>Algoritmo de cifrado de contraseñas con salt automático</td></tr>
+<tr><td>CORS</td><td>Cross-Origin Resource Sharing (permite requisiciones entre dominios)</td></tr>
+<tr><td>DTO</td><td>Data Transfer Object (objeto para transferir datos entre capas)</td></tr>
+<tr><td>Enum</td><td>Tipo de dato con valores predefinidos</td></tr>
+<tr><td>FK</td><td>Foreign Key (clave foránea, referencia a otra tabla)</td></tr>
+<tr><td>HTTP</td><td>HyperText Transfer Protocol (protocolo de comunicación web)</td></tr>
+<tr><td>HTTPS</td><td>HTTP Secure (HTTP con cifrado SSL/TLS)</td></tr>
+<tr><td>JPA</td><td>Java Persistence API (especificación para acceso a BD)</td></tr>
+<tr><td>JWT</td><td>JSON Web Token (token para autenticación stateless)</td></tr>
+<tr><td>ORM</td><td>Object Relational Mapping (mapeo de objetos a BD)</td></tr>
+<tr><td>PK</td><td>Primary Key (clave primaria, identificador único)</td></tr>
+<tr><td>REST</td><td>Representational State Transfer (arquitectura para APIs)</td></tr>
+<tr><td>SPA</td><td>Single Page Application (aplicación web que carga una sola página)</td></tr>
+<tr><td>SQL</td><td>Structured Query Language (lenguaje para BD)</td></tr>
+<tr><td>SSL/TLS</td><td>Secure Sockets Layer / Transport Layer Security (cifrado web)</td></tr>
+<tr><td>UUID</td><td>Universally Unique Identifier (identificador único universal)</td></tr>
+</table>
+
+<br/><br/>
+
+<h2>CONCLUSIÓN</h2>
+
+<p>EcoTrack es un proyecto completo de aplicación web que demuestra:</p>
+
+<ul>
+<li>✅ <strong>Arquitectura moderna</strong> con separación de capas</li>
+<li>✅ <strong>Tecnologías actuales</strong> (Angular, Spring Boot, MySQL, Docker)</li>
+<li>✅ <strong>Seguridad</strong> con cifrado y validación</li>
+<li>✅ <strong>Base de datos relacional</strong> con integridad referencial</li>
+<li>✅ <strong>Despliegue en producción</strong> con Docker y HTTPS</li>
+<li>✅ <strong>Funcionalidades completas</strong> desde autenticación hasta gráficos</li>
+</ul>
+
+<p><strong>Este proyecto es apto para ser presentado como TFG en un programa de 2º DAW.</strong></p>
+
+<div style="margin-top: 50px; padding-top: 20px; border-top: 2px solid #ddd; text-align: center; color: #7f8c8d; font-size: 0.9em;">
+<p>Generado: Enero 2026</p>
+<p>Para la defensa del TFG</p>
+</div>
+
+</body>
+</html>
