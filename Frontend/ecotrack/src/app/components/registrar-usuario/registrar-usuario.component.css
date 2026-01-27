@@ -89,6 +89,7 @@ input{
         flex-direction: column;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 35%;
+        padding-top: 2rem;
     }
 
     h1{
@@ -99,6 +100,13 @@ input{
 
     #Ecotrack span{
         font-size: 15px;
+    }
+
+    img{
+        width: 120px;
+        height: auto;
+        margin-top: 1rem;
+        position: relative;
     }
 }
 

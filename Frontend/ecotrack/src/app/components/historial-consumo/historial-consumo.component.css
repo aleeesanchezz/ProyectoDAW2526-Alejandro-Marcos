@@ -1,5 +1,6 @@
 table{
   margin-top: 1rem;
+  width: 100%;
 }
 
 h2{
@@ -15,8 +16,7 @@ h2{
 
 /* Contenedor con scroll horizontal para móvil */
 .table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 /* Estilos para tabla en móvil */
@@ -25,6 +25,11 @@ h2{
     width: 90%;
     margin: 1rem auto;
     font-size: 1.5rem;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   table {
