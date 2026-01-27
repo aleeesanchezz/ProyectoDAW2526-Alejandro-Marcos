@@ -1,4 +1,7 @@
+
+
 <body *ngIf="usuarioActual">
+  
 
 <app-navbar></app-navbar>
 
@@ -7,10 +10,9 @@
     <h2>Historial de consumos</h2>
     <div *ngIf="consumos.length === 0" id="alerta">
         <span>¡Todavia no tienes cosumos registrados!</span>
-        <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarConsumo()">+</button>
+        <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarConsumo()"></button>
     </div>
-    <div *ngIf="consumos.length >= 1" class="table-responsive">
-      <table class="table">
+    <table *ngIf="consumos.length >= 1" class="table">
         <thead>
             <tr>
                 <th scope="col">Categoria</th>
@@ -41,15 +43,14 @@
                 </td>
                 <td style="color: rgb(87, 184, 87);" name="co2">{{ consumo.co2 }}</td>
                 <td><button type="button" class="btn btn-success" (click)="redirigirModificarConsumo(consumo)" style="margin-left: 1rem;" title="Modificar">
-                  Modificar
+                  <i class="bi bi-pencil"></i>
                 </button></td>
                 <td><button class="btn btn-danger" (click)="mostrarModalEliminar(consumo.id)" style="margin-left: 1rem;" title="Eliminar">
-                  Eliminar
+                  <i class="bi bi-trash"></i>
                 </button></td>
             </tr>
         </tbody>
-      </table>
-    </div>
+    </table>
 
     <div *ngIf="modalEliminar" class="card-body" id="modal-eliminar">
       <p class="card-text">¿Estás seguro de que quieres eliminar este consumo?</p>

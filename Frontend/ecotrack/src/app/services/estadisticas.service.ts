@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class EstadisticasService {
 
-  private api: string = '/api/estadisticas';
+  private api: string = 'http://localhost:8080/api/estadisticas';
 
   constructor(private http: HttpClient) { }
 

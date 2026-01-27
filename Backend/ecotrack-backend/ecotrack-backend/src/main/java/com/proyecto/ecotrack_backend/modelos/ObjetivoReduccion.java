@@ -14,7 +14,7 @@ public class ObjetivoReduccion {
 
     @ManyToOne
     @JoinColumn(
-            name = "usuario_id",
+            name = "id_usuario",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_objetivo_usuario")
     )

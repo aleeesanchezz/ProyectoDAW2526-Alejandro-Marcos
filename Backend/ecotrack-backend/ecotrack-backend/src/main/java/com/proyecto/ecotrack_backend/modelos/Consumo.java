@@ -18,7 +18,7 @@ public class Consumo {
     // Clave foránea
     @ManyToOne
     @JoinColumn(
-            name = "usuario_id",
+            name = "id_usuario",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_consumo_usuario")
     )

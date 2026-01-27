@@ -3,7 +3,7 @@
 
     <div *ngIf="objetivos.length === 0" id="alerta">
         <span>¡Todavia no tienes objetivos registrados!</span>
-        <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarObjetivo()">+</button>
+        <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarObjetivo()"> </button>
     </div>
 
 <main *ngIf="objetivos.length >= 1">
@@ -17,7 +17,7 @@
             <p>Estado: <span>{{obtenerEstado(objetivo.estado)}}</span></p>
             <p *ngIf="objetivo.descripcion">Descripcion: <span>{{objetivo.descripcion}}</span></p>
             <button class="btn btn-danger" (click)="mostrarModalEliminar(objetivo.id)" id="eliminar" style="margin-left: 1rem;" title="Eliminar">
-                Eliminar
+                <i class="bi bi-trash"></i>
             </button>
         </div>
     </section>
