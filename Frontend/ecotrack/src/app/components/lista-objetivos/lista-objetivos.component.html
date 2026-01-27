@@ -9,6 +9,24 @@
 <main *ngIf="objetivos.length >= 1">
     <h2>Mis objetivos de reduccion</h2>
 
+    <div class="filtros">
+      <div id="buscador">
+         <input type="text" placeholder="Buscar" #termino id="buscar">
+        <button type="button" class="btn btn-success" (click)="buscar(termino)">Buscar</button>
+      </div>
+
+      <div class="nav-item dropdown" id="objetivos-dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          Ordenar
+        </a>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item" (click)="ordenarReciente()">Más reciente</button></li>
+          <li><button class="dropdown-item" (click)="ordenarAntiguo()">Más antiguo</button></li>
+        </ul>
+      </div>
+     
+    </div>
+
     <section>
         <div *ngFor="let objetivo of objetivos" id="objetivo" [style.border-left]="'4px solid ' + obtenerColorEstado(objetivo.estado)">
             <p>Mes objetivo: <span>{{objetivo.fechaInicio}}</span></p>

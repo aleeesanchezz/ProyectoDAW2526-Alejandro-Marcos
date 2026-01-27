@@ -15,6 +15,7 @@ import { ConsumoService } from 'src/app/services/consumo.service';
 export class HistorialConsumoComponent implements OnInit{
 
   consumos: Consumo[] = [];
+  consumosOriginales: Consumo[] = [];
 
   usuarioActual = this.authService.getUsuario();
 
@@ -51,15 +52,51 @@ export class HistorialConsumoComponent implements OnInit{
         // Procesar cada objetivo para sacar mes y año
         this.consumos.forEach(con => {
           if (con.fecha) {
+            con.fechaOriginal = con.fecha; // Guardar fecha original para ordenamiento
             const [anio, mes] = con.fecha.split('-');
             const nombreMes = this.nombresMes[Number(mes) - 1];
             con.fecha = `${nombreMes} ${anio}`;   
           }
         });
+        this.consumosOriginales = [...this.consumos];
         console.log(this.consumos);
       }
     })  
 
+  }
+
+  buscar($termino: any){
+    const termino = $termino.value.trim();
+    console.log(termino);
+    if(termino.length === 0){
+      this.consumos = [...this.consumosOriginales];
+    }
+    else{
+      this.consumos = this.consumosOriginales.filter(con => 
+        con.categoria.toLowerCase().includes(termino.toLowerCase()) ||
+        con.cantidad.toString().toLowerCase().includes(termino.toLowerCase()) ||
+        con.unidad.toLowerCase().includes(termino.toLowerCase()) ||
+        con.fecha.toLowerCase().includes(termino.toLowerCase()) ||
+        (con.notas && con.notas.toLowerCase().includes(termino.toLowerCase()))
+      );
+    }
+
+  }
+
+  ordenarReciente(){
+    this.consumos.sort((a, b) => {
+      const fechaA = new Date(a.fechaOriginal || a.fecha);
+      const fechaB = new Date(b.fechaOriginal || b.fecha);
+      return fechaB.getTime() - fechaA.getTime();
+    });
+  }
+
+  ordenarAntiguo(){
+    this.consumos.sort((a, b) => {
+      const fechaA = new Date(a.fechaOriginal || a.fecha);
+      const fechaB = new Date(b.fechaOriginal || b.fecha);
+      return fechaA.getTime() - fechaB.getTime();
+    });
   }
 
   registrarConsumo(){

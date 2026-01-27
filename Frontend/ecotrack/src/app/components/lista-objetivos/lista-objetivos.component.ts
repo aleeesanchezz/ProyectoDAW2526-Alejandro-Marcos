@@ -14,6 +14,7 @@ export class ListaObjetivosComponent implements OnInit {
 
   usuarioActual = this.authService.getUsuario();
   objetivos: ObjetivoReduccion[] = [];
+  objetivosOriginales: ObjetivoReduccion[] = [];
   modalEliminar: boolean = false;
 
   // Nombres de meses para formatear bonito
@@ -53,17 +54,51 @@ export class ListaObjetivosComponent implements OnInit {
         // Procesar cada objetivo para sacar mes y año
         this.objetivos.forEach(obj => {
           if (obj.fechaInicio) {
+            obj.fechaOriginal = obj.fechaInicio; // Guardar fecha original para ordenamiento
             const [anio, mes] = obj.fechaInicio.split('-');
             const nombreMes = this.nombresMes[Number(mes) - 1];
             obj.fechaInicio = `${nombreMes} ${anio}`;   
           }
         });
+        this.objetivosOriginales = [...this.objetivos];
 
         console.log(this.objetivos);
       },
       error: (err) => {
         console.error('Error al obtener objetivos', err);
       }
+    });
+  }
+
+  buscar($termino: any): void {
+    const termino = $termino.value.trim();
+    console.log(termino);
+    if(termino.length === 0){
+      this.objetivos = [...this.objetivosOriginales];
+    }
+    else{
+      this.objetivos = this.objetivosOriginales.filter(obj => 
+        obj.fechaInicio.toLowerCase().includes(termino.toLowerCase()) ||
+        obj.meta_co2.toString().toLowerCase().includes(termino.toLowerCase()) ||
+        this.obtenerEstado(obj.estado).toLowerCase().includes(termino.toLowerCase()) ||
+        (obj.descripcion && obj.descripcion.toLowerCase().includes(termino.toLowerCase()))
+      );
+    }
+  }
+
+  ordenarReciente(): void {
+    this.objetivos.sort((a, b) => {
+      const fechaA = new Date(a.fechaOriginal || a.fechaInicio);
+      const fechaB = new Date(b.fechaOriginal || b.fechaInicio);
+      return fechaB.getTime() - fechaA.getTime();
+    });
+  }
+
+  ordenarAntiguo(): void {
+    this.objetivos.sort((a, b) => {
+      const fechaA = new Date(a.fechaOriginal || a.fechaInicio);
+      const fechaB = new Date(b.fechaOriginal || b.fechaInicio);
+      return fechaA.getTime() - fechaB.getTime();
     });
   }
 

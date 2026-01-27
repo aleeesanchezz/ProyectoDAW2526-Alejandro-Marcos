@@ -13,6 +13,7 @@ export class Consumo{
          public fecha: string,
          public co2: number,
          public notas?: string,
+         public fechaOriginal?: string
         
     ){}
 

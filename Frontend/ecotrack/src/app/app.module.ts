@@ -21,6 +21,10 @@ import { DashboardsComponent } from './components/dashboards/dashboards.componen
 import { RegistrarObjetivoComponent } from './components/registrar-objetivo/registrar-objetivo.component';
 import { ListaObjetivosComponent } from './components/lista-objetivos/lista-objetivos.component';
 import { Co2ChartComponent } from './components/co2-chart/co2-chart.component';
+import { CrearNotaComponent } from './components/crear-nota/crear-nota.component';
+import { ListarNotasComponent } from './components/listar-notas/listar-notas.component';
+import { ListaNotasComponent } from './components/lista-notas/lista-notas.component';
+import { ModificarNotaComponent } from './components/modificar-nota/modificar-nota.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -34,8 +38,10 @@ const routes: Routes = [
   {path: 'modificar-consumo', component: ModificarConsumoComponent},
   {path: 'verificar-codigo', component: VerificarCodigoComponent} ,
   {path: 'registrar-objetivo', component: RegistrarObjetivoComponent},
-  {path: 'lista-objetivos', component: ListaObjetivosComponent}
-
+  {path: 'lista-objetivos', component: ListaObjetivosComponent},
+  {path: 'crear-nota', component: CrearNotaComponent},
+  {path: 'lista-notas', component: ListaNotasComponent},
+  {path: 'modificar-nota', component: ModificarNotaComponent}
 ]
 
 @NgModule({
@@ -56,7 +62,11 @@ const routes: Routes = [
     DashboardsComponent,
     RegistrarObjetivoComponent,
     ListaObjetivosComponent,
-    Co2ChartComponent,  
+    Co2ChartComponent,
+    CrearNotaComponent,
+    ListarNotasComponent,
+    ListaNotasComponent,
+    ModificarNotaComponent
   ],
   imports: [
     BrowserModule,

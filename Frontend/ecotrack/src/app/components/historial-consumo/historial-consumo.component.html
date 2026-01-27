@@ -1,5 +1,3 @@
-
-
 <body *ngIf="usuarioActual">
   
 
@@ -9,8 +7,26 @@
 <main id="body">
     <h2>Historial de consumos</h2>
     <div *ngIf="consumos.length === 0" id="alerta">
-        <span>¡Todavia no tienes cosumos registrados!</span>
+        <span>¡Todavia no tienes consumos registrados!</span>
         <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarConsumo()"></button>
+    </div>
+
+    <div class="filtros">
+      <div id="buscador">
+         <input type="text" placeholder="Buscar" #termino id="buscar">
+        <button type="button" class="btn btn-success" (click)="buscar(termino)">Buscar</button>
+      </div>
+
+      <div class="nav-item dropdown" id="objetivos">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="font-size: 0.9rem;">
+          Ordenar
+        </a>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item" (click)="ordenarReciente()">Más reciente</button></li>
+          <li><button class="dropdown-item" (click)="ordenarAntiguo()">Más antiguo</button></li>
+        </ul>
+      </div>
+     
     </div>
     <table *ngIf="consumos.length >= 1" class="table">
         <thead>
@@ -42,11 +58,11 @@
                   </div>      
                 </td>
                 <td style="color: rgb(87, 184, 87);" name="co2">{{ consumo.co2 }}</td>
-                <td><button type="button" class="btn btn-success" (click)="redirigirModificarConsumo(consumo)" style="margin-left: 1rem;" title="Modificar">
-                  <i class="bi bi-pencil"></i>
+                <td><button type="button" class="btn btn-success btn-action" (click)="redirigirModificarConsumo(consumo)" title="Modificar">
+                  <span class="btn-text">Modificar</span>
                 </button></td>
-                <td><button class="btn btn-danger" (click)="mostrarModalEliminar(consumo.id)" style="margin-left: 1rem;" title="Eliminar">
-                  <i class="bi bi-trash"></i>
+                <td><button class="btn btn-danger btn-action" (click)="mostrarModalEliminar(consumo.id)" title="Eliminar">
+                  <span class="btn-text">Eliminar</span>
                 </button></td>
             </tr>
         </tbody>

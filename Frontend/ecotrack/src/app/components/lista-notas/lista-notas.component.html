@@ -1,0 +1,58 @@
+<body *ngIf="usuarioActual">
+  <app-navbar></app-navbar>
+
+  <div *ngIf="notas.length === 0" id="alerta">
+    <span>¡Todavia no tienes notas registradas!</span>
+    <button type="button" class="btn btn-success bi-plus-circle" id="añadirNota" (click)="crearNota()"></button>
+  </div>
+
+  <main *ngIf="notas.length >= 1">
+    <h2>Mis notas</h2>
+
+    <div class="filtros">
+      <div id="buscador">
+        <input type="text" placeholder="Buscar notas" #termino id="buscar">
+        <button type="button" class="btn btn-success" (click)="buscar(termino)">Buscar</button>
+      </div>
+
+      <div class="nav-item dropdown" id="notas-dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          Ordenar
+        </a>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item" (click)="ordenarReciente()">Más reciente</button></li>
+          <li><button class="dropdown-item" (click)="ordenarAntiguo()">Más antiguo</button></li>
+        </ul>
+      </div>
+
+      <button type="button" class="btn btn-success" id="crearNotaBtn" (click)="crearNota()">
+        <i class="bi bi-plus-circle"></i> Nueva nota
+      </button>
+    </div>
+
+    <section>
+      <div *ngFor="let nota of notas" id="nota" [style.border-left]="'4px solid ' + nota.color">
+        <div class="nota-header">
+          <h3>{{ nota.titulo }}</h3>
+          <div class="nota-acciones">
+            <button class="btn btn-success btn-action" (click)="redirigirModificarNota(nota)" title="Modificar">
+              <i class="bi bi-pencil"></i><span class="btn-text">Modificar</span>
+            </button>
+            <button class="btn btn-danger btn-action" (click)="mostrarModalEliminar(nota.id)" title="Eliminar">
+              <i class="bi bi-trash"></i><span class="btn-text">Eliminar</span>
+            </button>
+          </div>
+        </div>
+        <p class="nota-contenido">{{ nota.contenido }}</p>
+        <p class="nota-fecha">{{ nota.fecha }}</p>
+      </div>
+    </section>
+
+    <div *ngIf="modalEliminar" class="card-body" id="modal-eliminar">
+      <p class="card-text">¿Estás seguro de que quieres eliminar esta nota?</p>
+      <a class="btn btn-success" (click)="cerrarModal()">Cerrar</a>
+      <a class="btn btn-danger" (click)="eliminarNota()" style="margin-left: 1rem;">Eliminar</a>
+    </div>
+  </main>
+
+</body>

@@ -115,6 +115,30 @@
     <text class="attribute-text" x="70" y="578">🔗 usuario_id (FK)</text>
   </g>
   
+  <!-- Entidad Nota -->
+  <g id="nota">
+    <rect class="entity-box" x="850" y="420" width="280" height="210" rx="5"/>
+    <text class="entity-title" x="990" y="450" text-anchor="middle">NOTA</text>
+    
+    <rect class="pk" x="860" y="470" width="260" height="25" rx="3"/>
+    <text class="attribute-text" x="870" y="488">🔑 id</text>
+    
+    <rect class="attribute" x="860" y="500" width="260" height="25" rx="3"/>
+    <text class="attribute-text" x="870" y="518">titulo</text>
+    
+    <rect class="attribute" x="860" y="530" width="260" height="25" rx="3"/>
+    <text class="attribute-text" x="870" y="548">contenido</text>
+    
+    <rect class="attribute" x="860" y="560" width="260" height="25" rx="3"/>
+    <text class="attribute-text" x="870" y="578">fecha</text>
+    
+    <rect class="attribute" x="860" y="590" width="260" height="25" rx="3"/>
+    <text class="attribute-text" x="870" y="608">color</text>
+    
+    <rect class="fk" x="860" y="620" width="260" height="25" rx="3"/>
+    <text class="attribute-text" x="870" y="638">🔗 id_usuario (FK)</text>
+  </g>
+  
   <!-- Relación Usuario - Consumo -->
   <path class="relation-line" d="M 330 170 L 470 200" marker-end="url(#arrowhead)"/>
   <text class="cardinality" x="340" y="165">1</text>
@@ -132,6 +156,12 @@
   <text class="cardinality" x="200" y="300">1</text>
   <text class="cardinality" x="200" y="410">N</text>
   <text class="relation-text" x="200" y="360">tiene</text>
+  
+  <!-- Relación Usuario - Nota -->
+  <path class="relation-line" d="M 330 200 L 850 520" marker-end="url(#arrowhead)"/>
+  <text class="cardinality" x="340" y="210">1</text>
+  <text class="cardinality" x="830" y="515">N</text>
+  <text class="relation-text" x="580" y="350">crea</text>
   
   <!-- Marcador de flecha para las relaciones -->
   <defs>

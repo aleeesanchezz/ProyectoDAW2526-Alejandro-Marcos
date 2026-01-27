@@ -72,3 +72,55 @@ Estos son los casos de uso que nos faltaban por desarrollar:
 - **HU-15: Eliminar objetivos de reducción**
   - Descripción: Como usuario, quiero borrar un objetivo que ya no necesito.
   - Características: Confirmación previa, eliminación del objetivo, actualización del listado.
+
+- **HU-16: Ordenar ascendentemente los consumos**
+  - Descripción: Como usuario, quiero ordenar mis consumos de forma ascendente para visualizarlos mejor.
+  - Características: Ordenación por diferentes campos (fecha, cantidad, CO2), actualización de la tabla.
+
+- **HU-17: Ordenar descendentemente los consumos**
+  - Descripción: Como usuario, quiero ordenar mis consumos de forma descendente para ver los más recientes primero.
+  - Características: Ordenación inversa por diferentes campos, actualización de la tabla.
+
+- **HU-18: Filtrar consumos**
+  - Descripción: Como usuario, quiero filtrar mis consumos por diferentes criterios.
+  - Características: Filtros por categoría, rango de fechas, cantidad, actualización dinámica.
+
+- **HU-19: Ordenar ascendentemente los objetivos**
+  - Descripción: Como usuario, quiero ordenar mis objetivos de forma ascendente.
+  - Características: Ordenación por fecha de inicio, fecha fin, estado, actualización de la lista.
+
+- **HU-20: Ordenar descendentemente los objetivos**
+  - Descripción: Como usuario, quiero ordenar mis objetivos de forma descendente.
+  - Características: Ordenación inversa por diferentes campos, actualización de la lista.
+
+- **HU-21: Filtrar los objetivos**
+  - Descripción: Como usuario, quiero filtrar mis objetivos según diferentes criterios.
+  - Características: Filtros por estado, rango de fechas, meta CO2, actualización dinámica.
+
+- **HU-22: Añadir notas**
+  - Descripción: Como usuario, quiero crear notas para recordar información importante.
+  - Características: Campos (título, contenido, color), validación básica, confirmación de creación.
+
+- **HU-23: Ver notas**
+  - Descripción: Como usuario, quiero visualizar todas mis notas.
+  - Características: Listado de notas, visualización de título y contenido, indicador de fecha.
+
+- **HU-24: Modificar notas**
+  - Descripción: Como usuario, quiero editar mis notas existentes.
+  - Características: Edición de título, contenido y color, validación, confirmación de cambios.
+
+- **HU-25: Eliminar notas**
+  - Descripción: Como usuario, quiero borrar notas que ya no necesito.
+  - Características: Confirmación previa, eliminación del registro, actualización del listado.
+
+- **HU-26: Ordenar ascendentemente las notas**
+  - Descripción: Como usuario, quiero ordenar mis notas de forma ascendente.
+  - Características: Ordenación por fecha, título, actualización de la lista.
+
+- **HU-27: Ordenar descendentemente las notas**
+  - Descripción: Como usuario, quiero ordenar mis notas de forma descendente.
+  - Características: Ordenación inversa por fecha o título, actualización de la lista.
+
+- **HU-28: Filtrar las notas**
+  - Descripción: Como usuario, quiero filtrar mis notas según diferentes criterios.
+  - Características: Filtros por fecha, color, palabra clave en título/contenido, actualización dinámica.

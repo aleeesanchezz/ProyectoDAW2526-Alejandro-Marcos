@@ -9,7 +9,8 @@ export class ObjetivoReduccion{
         public fechaInicio: string,
         public fechaFin: string,
         public estado: Estado,
-        public descripcion?: string
+        public descripcion?: string,
+        public fechaOriginal?: string
     ){}
 
 }

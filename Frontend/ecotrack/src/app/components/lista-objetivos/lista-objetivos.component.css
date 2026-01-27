@@ -44,6 +44,63 @@ h2{
     text-align: center;
 }
 
+.filtros{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#buscador{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#buscar{
+  height: 38px;
+  padding: 0.5rem;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+}
+
+/* Estilos para el dropdown de ordenar */
+#objetivos-dropdown .nav-link {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+}
+
+#objetivos-dropdown .nav-link:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+  transform: translateY(-2px);
+}
+
+#objetivos-dropdown .dropdown-menu {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+#objetivos-dropdown .dropdown-item {
+  padding: 0.6rem 1.2rem;
+  transition: all 0.2s ease;
+}
+
+#objetivos-dropdown .dropdown-item:hover {
+  background-color: #f1f8f4;
+  color: #4CAF50;
+  padding-left: 1.5rem;
+}
+
 section{
     display: flex;
     flex-direction: column;
@@ -83,6 +140,84 @@ span{
     top: 0;
     right: 0;
     margin: 1rem;
+}
+
+/* Responsive para m\u00f3vil */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.3rem;
+    width: 90%;
+    margin: 1rem auto;
+    padding: 0.8rem;
+  }
+
+  .filtros {
+    flex-direction: column;
+    width: 95%;
+    gap: 0.8rem;
+  }
+
+  #buscador {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #buscar {
+    width: 100%;
+  }
+
+  #buscador .btn {
+    width: 100%;
+  }
+
+  #objetivos-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  #objetivos-dropdown .nav-link {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+
+  #objetivo {
+    width: 90%;
+  }
+
+  .card-body {
+    width: 90%;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #alerta {
+    width: 90%;
+  }
+}
+
+@media (max-width: 576px) {
+  h2 {
+    font-size: 1.1rem;
+    width: 95%;
+  }
+
+  #objetivo {
+    width: 95%;
+    padding: 0.8rem;
+    margin: 1rem 0.5rem;
+  }
+
+  #objetivo p {
+    font-size: 0.9rem;
+  }
+
+  #eliminar {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
 }
 
 @media (max-width: 991.98px) {
