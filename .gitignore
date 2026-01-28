@@ -27,12 +27,6 @@ Thumbs.db
 *.iml
 *.sublime-*
 
-# Backups
-*.sql
-*.sql.gz
-backups/
-*.bak
-
 # Logs
 *.log
 logs/
