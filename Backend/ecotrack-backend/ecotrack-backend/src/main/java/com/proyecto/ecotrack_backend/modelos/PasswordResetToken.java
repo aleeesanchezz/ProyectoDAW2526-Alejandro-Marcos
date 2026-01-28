@@ -10,6 +10,7 @@ public class PasswordResetToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT UNSIGNED")
     private Integer id;
 
     @Column(nullable = false, unique = true)

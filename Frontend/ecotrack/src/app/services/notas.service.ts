@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotasService {
 
-    private api: string = 'http://localhost:8080/api/notas';
+    private api: string = `${environment.apiUrl}/notas`;
 
   constructor(private http: HttpClient) { }
 

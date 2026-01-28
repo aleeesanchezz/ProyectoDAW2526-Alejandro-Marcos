@@ -13,19 +13,20 @@ public class Consumo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT UNSIGNED")
     private Integer id;
 
     // Clave foránea
     @ManyToOne
     @JoinColumn(
-            name = "id_usuario",
+            name = "usuario_id",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_consumo_usuario")
     )
 
     private Usuario usuario;
 
-    @Column(nullable = false)
+    @Column(name = "tipo", nullable = false)
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
 
@@ -39,10 +40,10 @@ public class Consumo {
     @Column(nullable = false)
     private LocalDate fecha;
 
-    @Column(nullable = false)
+    @Column(name = "co2_generado", nullable = false)
     private double co2;
 
-    @Column(nullable = true)
+    @Column(name = "descripcion", nullable = true)
     private String notas;
 
     public Consumo() {

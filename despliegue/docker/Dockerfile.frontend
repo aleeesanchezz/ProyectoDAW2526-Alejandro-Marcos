@@ -1,0 +1,45 @@
+# Stage 1: Build
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copiar archivos de package
+COPY Frontend/ecotrack/package*.json ./
+
+# Instalar dependencias
+RUN npm ci --prefer-offline --no-audit
+
+# Copiar código fuente
+COPY Frontend/ecotrack/ ./
+
+# Compilar para producción
+RUN npm run build -- --configuration production
+
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+
+# Crear usuario no-root
+RUN addgroup -S nginx_user && adduser -S nginx_user -G nginx_user
+
+# Copiar archivos compilados
+COPY --from=builder /app/dist/ecotrack /usr/share/nginx/html
+
+# Copiar configuración de nginx
+COPY despliegue/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY despliegue/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+
+# Crear directorio de logs
+RUN mkdir -p /var/log/nginx && \
+    chown -R nginx_user:nginx_user /var/log/nginx && \
+    chown -R nginx_user:nginx_user /var/cache/nginx && \
+    chown -R nginx_user:nginx_user /etc/nginx
+
+USER nginx_user
+
+EXPOSE 80
+
+# Healthcheck para verificar que el servicio está disponible
+HEALTHCHECK --interval=30s --timeout=5s --retries=20 \
+  CMD wget --quiet --tries=1 --spider http://localhost:80/ || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]

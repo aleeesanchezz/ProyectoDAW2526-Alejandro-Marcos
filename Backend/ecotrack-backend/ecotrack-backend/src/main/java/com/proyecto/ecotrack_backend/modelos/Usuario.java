@@ -12,6 +12,7 @@ public class Usuario {
 
     @Id //Indica que es la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica que la clave primaria se completa automaticamente y de manera incremental
+    @Column(columnDefinition = "INT UNSIGNED")
     private Integer id;
 
     @Column(nullable = false)

@@ -55,11 +55,13 @@ public class ObjetivoReduccionServicioImpl implements ObjetivoReduccionServicio{
 
         ObjetivoReduccion objetivo = new ObjetivoReduccion();
         objetivo.setUsuario(usuario);
+        objetivo.setNombre(usuario.getNombreUsuario());
+        objetivo.setDescripcion(objetivoDto.getDescripcion());
+        objetivo.setPorcentajeReduccion(objetivoDto.getPorcentajeReduccion());
         objetivo.setMeta_co2(objetivoDto.getMeta_co2());
         objetivo.setFechaInicio(objetivoDto.getFechaInicio());
         objetivo.setFechaFin(fechaFinObjetivo);
         objetivo.setEstado(objetivoDto.getEstado());
-        objetivo.setDescripcion(objetivoDto.getDescripcion());
 
         return objetivoRepositorio.save(objetivo);
 
