@@ -39,3 +39,7 @@ npm-debug.log
 temp/
 tmp/
 *.tmp
+
+# Documentos de defensa TFG
+EcoTrack_Defensa.pdf
+EcoTrack_Defensa.md
