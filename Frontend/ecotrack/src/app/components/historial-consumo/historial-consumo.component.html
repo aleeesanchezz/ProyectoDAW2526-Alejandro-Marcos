@@ -5,13 +5,14 @@
 
 
 <main id="body">
-    <h2>Historial de consumos</h2>
-    <div *ngIf="consumos.length === 0" id="alerta">
+  <h2>Historial de consumos</h2>
+    
+    <div *ngIf="noHayConsumos" id="alerta">
         <span>¡Todavia no tienes consumos registrados!</span>
         <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarConsumo()"></button>
     </div>
 
-    <div class="filtros">
+    <div *ngIf="!noHayConsumos" class="filtros">
       <div id="buscador">
          <input type="text" placeholder="Buscar" #termino id="buscar">
         <button type="button" class="btn btn-success" (click)="buscar(termino)">Buscar</button>
@@ -26,9 +27,12 @@
           <li><button class="dropdown-item" (click)="ordenarAntiguo()">Más antiguo</button></li>
         </ul>
       </div>
-     
     </div>
+
+    
     <table *ngIf="consumos.length >= 1" class="table">
+     
+    
         <thead>
             <tr>
                 <th scope="col">Categoria</th>
@@ -59,10 +63,10 @@
                 </td>
                 <td style="color: rgb(87, 184, 87);" name="co2">{{ consumo.co2 }}</td>
                 <td><button type="button" class="btn btn-success btn-action" (click)="redirigirModificarConsumo(consumo)" title="Modificar">
-                  <span class="btn-text">Modificar</span>
+                  <i class="bi bi-pencil"></i>
                 </button></td>
                 <td><button class="btn btn-danger btn-action" (click)="mostrarModalEliminar(consumo.id)" title="Eliminar">
-                  <span class="btn-text">Eliminar</span>
+                  <i class="bi bi-trash"></i>
                 </button></td>
             </tr>
         </tbody>

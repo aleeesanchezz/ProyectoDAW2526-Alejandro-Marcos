@@ -27,9 +27,10 @@ import { ListaNotasComponent } from './components/lista-notas/lista-notas.compon
 import { ModificarNotaComponent } from './components/modificar-nota/modificar-nota.component';
 
 const routes: Routes = [
-  {path:'', component:LoginComponent},
+
+  {path:'login', component:LoginComponent},
   {path:'usuarios/registrar', component: RegistrarUsuarioComponent},
-  {path: 'inicio', component: PaginaPrincipalComponent},
+  {path: '', component: PaginaPrincipalComponent},
   {path: 'registrar-consumo', component: RegistrarConsumoComponent},
   {path: 'historial-consumo', component: HistorialConsumoComponent},
   {path: 'menu-usuario', component: MenuUsuarioComponent},

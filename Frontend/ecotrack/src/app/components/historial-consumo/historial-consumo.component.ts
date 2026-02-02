@@ -23,6 +23,8 @@ export class HistorialConsumoComponent implements OnInit{
 
   modalEliminar: boolean = false;
 
+  noHayConsumos: boolean = false;
+
   constructor(private authService: AuthServiceService, private consumoService: ConsumoService, private router: Router){}
 
   private nombresMes = [
@@ -47,6 +49,9 @@ export class HistorialConsumoComponent implements OnInit{
 
     this.consumoService.obtenerListas(idUsuario).subscribe({
       next: (res) =>{
+        if(res.length === 0){
+          this.noHayConsumos = true;
+        }
         this.consumos = res;
 
         // Procesar cada objetivo para sacar mes y año
@@ -79,6 +84,8 @@ export class HistorialConsumoComponent implements OnInit{
         con.fecha.toLowerCase().includes(termino.toLowerCase()) ||
         (con.notas && con.notas.toLowerCase().includes(termino.toLowerCase()))
       );
+
+    
     }
 
   }

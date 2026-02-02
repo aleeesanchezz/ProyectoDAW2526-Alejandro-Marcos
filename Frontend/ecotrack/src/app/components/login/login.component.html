@@ -10,7 +10,9 @@
         </div>
 
         <div class="mb-3">
-            <input [(ngModel)]="password" type="password" placeholder="Contraseña *" class="form-control" id="contraseña" name="contraseña" required #pass="ngModel">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <input [(ngModel)]="password" type="password" placeholder="Contraseña *" class="form-control" id="contraseña" name="contraseña" required #pass="ngModel"><i (click)="mostrarPassword()" class="fa-regular fa-eye" id="toggleIcon"></i>
+            </div>
             <div style="color: red;" [hidden]="pass.valid || pass.untouched">
                 Este campo es obligatorio
             </div>

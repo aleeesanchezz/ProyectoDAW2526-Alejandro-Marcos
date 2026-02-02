@@ -36,11 +36,7 @@ export class PaginaPrincipalComponent implements OnInit{
           this.totalCo2GeneradoEsteMesRedondeado = this.totalCo2GeneradoEsteMes.toFixed(2);
         }
       })
-    } else{
-    
-      this.authService.redirigirLogin();
-    
-    }
+    } 
     
 
   }

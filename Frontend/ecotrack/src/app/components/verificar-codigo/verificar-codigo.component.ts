@@ -16,9 +16,17 @@ export class VerificarCodigoComponent {
   mensaje: string = '';
   error: string = '';
 
+  formatoCodigoInvalido: boolean = false;
+
   constructor(private usuarioService: UsuarioService){}
 
   verificarCodigo(){
+
+    if(this.formatoCodigoInvalido){
+      return;
+    }
+
+    console.log(this.formatoCodigoInvalido)
     
     this.usuarioService.comprobarCodigo(this.codigo).subscribe({
       next: (res) => {
@@ -26,6 +34,12 @@ export class VerificarCodigoComponent {
       }
     })
   }
+
+  validarFormatoCodigo() {
+    if(isNaN(Number(this.codigo))){
+      this.formatoCodigoInvalido = true;
+  }
+}
 
   registrarUsuario(){
     const usuarioParaRegistrar = localStorage.getItem('usuarioParaRegistrar');

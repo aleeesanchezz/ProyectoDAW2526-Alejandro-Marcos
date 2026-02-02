@@ -71,7 +71,17 @@ fi
 
 # 6. Limpiar Docker system
 print_step "Limpiando sistema de Docker..."
-docker system prune -f --volumes 2>/dev/null || true
+# Eliminar todo menos los volúmenes de caddy (caddy_data y caddy_config)
+print_step "Eliminando contenedores detenidos, redes no usadas e imágenes sin usar..."
+docker system prune -f 2>/dev/null || true
+
+# Eliminar volúmenes no usados EXCEPTO caddy_data y caddy_config
+print_step "Eliminando volúmenes no usados excepto caddy_data y caddy_config..."
+for vol in $(docker volume ls -qf dangling=true); do
+    if [ "$vol" != "caddy_data" ] && [ "$vol" != "caddy_config" ]; then
+        docker volume rm "$vol" 2>/dev/null || true
+    fi
+done
 
 echo ""
 print_step "Limpieza completada exitosamente"

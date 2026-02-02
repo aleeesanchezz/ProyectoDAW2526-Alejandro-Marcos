@@ -4,6 +4,7 @@ import com.proyecto.ecotrack_backend.excepciones.EmailExistenteException;
 import com.proyecto.ecotrack_backend.excepciones.NombreUsuarioExistenteException;
 import com.proyecto.ecotrack_backend.modelos.PasswordResetToken;
 import com.proyecto.ecotrack_backend.modelos.Usuario;
+import com.proyecto.ecotrack_backend.repositorio.NotaRepositorio;
 import com.proyecto.ecotrack_backend.repositorio.PasswordResetTokenRepository;
 import com.proyecto.ecotrack_backend.repositorio.UsuarioRepositorio;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,13 +20,15 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     private final PasswordEncoder codificarPassword;
     private final com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio consumoRepositorio;
     private final com.proyecto.ecotrack_backend.repositorio.ObjetivoReduccionRepositorio objetivoReduccionRepositorio;
+    private final NotaRepositorio notaRepositorio;
 
-    public UsuarioServicioImpl(UsuarioRepositorio usuarioRepo, PasswordResetTokenRepository passwordResetTokenRepository, PasswordEncoder codificarPassword, com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio consumoRepositorio, com.proyecto.ecotrack_backend.repositorio.ObjetivoReduccionRepositorio objetivoReduccionRepositorio) {
+    public UsuarioServicioImpl(UsuarioRepositorio usuarioRepo, PasswordResetTokenRepository passwordResetTokenRepository, PasswordEncoder codificarPassword, com.proyecto.ecotrack_backend.repositorio.ConsumoRepositorio consumoRepositorio, com.proyecto.ecotrack_backend.repositorio.ObjetivoReduccionRepositorio objetivoReduccionRepositorio, NotaRepositorio notaRepositorio) {
         this.usuarioRepo = usuarioRepo;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.codificarPassword = codificarPassword;
         this.consumoRepositorio = consumoRepositorio;
         this.objetivoReduccionRepositorio = objetivoReduccionRepositorio;
+        this.notaRepositorio = notaRepositorio;
     }
 
     @Override
@@ -61,6 +64,8 @@ public class UsuarioServicioImpl implements UsuarioServicio{
             objetivoReduccionRepositorio.deleteByUsuarioId(id);
             // Eliminar consumos del usuario
             consumoRepositorio.deleteByUsuarioId(id);
+            // Elimina notas del usuario
+            notaRepositorio.deleteByUsuarioId(id);
             // Eliminar tokens de restablecimiento de contraseña
             passwordResetTokenRepository.deleteByUsuarioId(id);
             // Eliminar usuario

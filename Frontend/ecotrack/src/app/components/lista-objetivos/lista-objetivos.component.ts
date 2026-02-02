@@ -17,6 +17,8 @@ export class ListaObjetivosComponent implements OnInit {
   objetivosOriginales: ObjetivoReduccion[] = [];
   modalEliminar: boolean = false;
 
+  noHayObjetivos: boolean = false;
+
   // Nombres de meses para formatear bonito
   private nombresMes = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -50,6 +52,10 @@ export class ListaObjetivosComponent implements OnInit {
     this.objetivoService.obtenerObjetivos(idUsuarioActual).subscribe({
       next: (res) => {
         this.objetivos = res;
+
+        if(res.length === 0){
+          this.noHayObjetivos = true;
+        }
 
         // Procesar cada objetivo para sacar mes y año
         this.objetivos.forEach(obj => {

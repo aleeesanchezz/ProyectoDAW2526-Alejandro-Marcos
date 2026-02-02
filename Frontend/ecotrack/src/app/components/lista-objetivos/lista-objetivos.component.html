@@ -1,15 +1,16 @@
 <body *ngIf="usuarioActual">
 <app-navbar></app-navbar>
 
-    <div *ngIf="objetivos.length === 0" id="alerta">
+    <h2>Mis objetivos de reduccion</h2>
+
+    <div *ngIf="noHayObjetivos" id="alerta">
         <span>¡Todavia no tienes objetivos registrados!</span>
         <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarObjetivo()"> </button>
     </div>
 
-<main *ngIf="objetivos.length >= 1">
-    <h2>Mis objetivos de reduccion</h2>
 
-    <div class="filtros">
+
+      <div *ngIf="!noHayObjetivos" class="filtros">
       <div id="buscador">
          <input type="text" placeholder="Buscar" #termino id="buscar">
         <button type="button" class="btn btn-success" (click)="buscar(termino)">Buscar</button>
@@ -27,6 +28,8 @@
      
     </div>
 
+<main *ngIf="objetivos.length >= 1">
+  
     <section>
         <div *ngFor="let objetivo of objetivos" id="objetivo" [style.border-left]="'4px solid ' + obtenerColorEstado(objetivo.estado)">
             <p>Mes objetivo: <span>{{objetivo.fechaInicio}}</span></p>
@@ -47,6 +50,10 @@
       <a class="btn btn-danger" (click)="eliminarObjetivo()" style="margin-left: 1rem;">Eliminar</a>
     </div>
 </main>
+
+<button type="button" class="btn btn-success" id="crearNotaBtn" routerLink="/registrar-objetivo">
+        <i class="bi bi-plus-circle"></i> Nuevo objetivo
+      </button>
     
 
 </body>

@@ -1,3 +1,12 @@
 ﻿<div class="chart-container">
-  <div #chartContainer class="graph-wrapper"></div>
+  <div class="year-selector">
+    <label for="yearSelect">Año:</label>
+    <select id="yearSelect" [(ngModel)]="selectedYear" (change)="onYearChange(selectedYear)" class="year-select">
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+  <div *ngIf="noData" class="no-data-message">
+    No hay datos de consumo disponibles para el año {{ selectedYear }}
+  </div>
+  <div *ngIf="!noData" #chartContainer class="graph-wrapper"></div>
 </div>

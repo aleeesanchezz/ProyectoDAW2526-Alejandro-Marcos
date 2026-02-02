@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
       next: (res: Usuario) => {
         this.authService.setUsuario(res);
         setTimeout(() => {
-          this.router.navigate(['inicio']);
+          this.router.navigate(['']);
         }, 1000);
       },
       error: (err) => {
@@ -39,6 +39,12 @@ export class LoginComponent implements OnInit{
         }
       }
     })
+  }
+
+  mostrarPassword(){
+    const passwordInput = document.getElementById('contraseña') as HTMLInputElement;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password'; 
+    const toggleIcon = document.getElementById('toggleIcon');
   }
 
 }

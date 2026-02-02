@@ -3,6 +3,18 @@
   box-sizing: border-box;
 }
 
+/* Offset for fixed navbar */
+:host {
+  display: block;
+  padding-top: 100px;
+}
+
+@media (max-width: 991.98px) {
+  :host {
+    padding-top: 80px;
+  }
+}
+
 body {
   background: linear-gradient(135deg, #F5F5F5 0%, #E8F5E9 100%);
   min-height: 100vh;

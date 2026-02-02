@@ -1,11 +1,11 @@
-/* Offset for fixed navbar */
-:host {
+/* Offset for fixed navbar - only for pages with navbar */
+:host.with-navbar {
 	display: block;
 	padding-top: 100px;
 }
 
 @media (max-width: 991.98px) {
-	:host {
+	:host.with-navbar {
 		padding-top: 80px;
 	}
 }

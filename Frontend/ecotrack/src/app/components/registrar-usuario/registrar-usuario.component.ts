@@ -52,6 +52,13 @@ export class RegistrarUsuarioComponent implements OnInit{
     })
   }
 
+  mostrarPassword(){
+    const passwordInput = document.getElementById('contraseña') as HTMLInputElement;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+
+    const toggleIcon = document.getElementById('toggleIcon');
+  }
+
   limpiar(){
     this.nombre = '';
     this.apellidos = '';

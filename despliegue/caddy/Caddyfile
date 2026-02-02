@@ -1,17 +1,51 @@
 {
     email admin@ecotrack.com
+    acme_ca https://acme.zerossl.com/v2/DV90
 }
 
-ecotrack-pi.duckdns.org {
-#    tls internal
+# Redirección ABSOLUTA de HTTP a HTTPS
+http://ecotrack-pi.duckdns.org {
+    redir https://{host}{uri} permanent
+}
 
-    # API → Backend Spring (keep full path /api/...)
+https://ecotrack-pi.duckdns.org {
+    # Headers de seguridad MANDATORIOS
+    header {
+        # HSTS - ELIMINA "No seguro" en navegadores
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        
+        # CSP - BLOQUEA mixed content
+        Content-Security-Policy "upgrade-insecure-requests; default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"
+        
+        # Headers esenciales
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+    
+    # API
     handle /api/* {
-        reverse_proxy ecotrack-backend:8080
+        reverse_proxy ecotrack-backend:8080 {
+            header_up X-Forwarded-Proto https
+            header_up X-Real-IP {remote}
+        }
     }
 
-    # Frontend Angular (everything else)
+    # Frontend Angular - FORZAR HTTPS en proxies
     handle {
-        reverse_proxy ecotrack-frontend:80
+        encode gzip
+        reverse_proxy ecotrack-frontend:80 {
+            header_up X-Forwarded-Proto https
+            header_up X-Forwarded-Ssl on
+            header_up Host {host}
+        }
+    }
+    
+    # Logging para debug
+    log {
+        output stdout
+        format json
     }
 }

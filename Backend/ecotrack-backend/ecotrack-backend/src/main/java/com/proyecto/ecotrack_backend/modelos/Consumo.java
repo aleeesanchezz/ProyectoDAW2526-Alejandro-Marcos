@@ -40,7 +40,7 @@ public class Consumo {
     @Column(nullable = false)
     private LocalDate fecha;
 
-    @Column(name = "co2_generado", nullable = false)
+    @Column(name = "co2", nullable = false)
     private double co2;
 
     @Column(name = "descripcion", nullable = true)

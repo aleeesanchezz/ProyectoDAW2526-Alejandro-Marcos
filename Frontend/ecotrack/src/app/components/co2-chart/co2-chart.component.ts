@@ -12,12 +12,28 @@ export class Co2ChartComponent implements OnInit, OnDestroy {
   @ViewChild("chartContainer") chartContainer!: ElementRef;
   private chart: ApexCharts | any = null;
   private chartHeight: number = 450;
+  selectedYear: number = new Date().getFullYear();
+  years: number[] = [];
+  noData: boolean = false;
 
   constructor(
     private authService: AuthServiceService,
     private consumoService: ConsumoService
   ) {
     this.chartHeight = this.obtenerAlturaSegunPantalla();
+    this.initializeYears();
+  }
+
+  private initializeYears(): void {
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear; year >= 2000; year--) {
+      this.years.push(year);
+    }
+  }
+
+  onYearChange(year: number): void {
+    this.selectedYear = Number(year);
+    this.cargarGrafico();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -63,7 +79,18 @@ export class Co2ChartComponent implements OnInit, OnDestroy {
 
     this.consumoService.obtenerListas(usuario.id).subscribe({
       next: (consumos) => {
-        this.mostrarGrafico(consumos);
+        console.log("Total consumos cargados:", consumos.length);
+        console.log("Año seleccionado:", this.selectedYear);
+        
+        const filteredConsumos = consumos.filter(consumo => {
+          const fecha = new Date(consumo.fecha);
+          const year = fecha.getFullYear();
+          console.log("Consumo fecha:", consumo.fecha, "Año:", year);
+          return year === this.selectedYear;
+        });
+        
+        console.log("Consumos filtrados para el año", this.selectedYear + ":", filteredConsumos.length);
+        this.mostrarGrafico(filteredConsumos);
       },
       error: (error) => {
         console.error("Error cargando consumos:", error);
@@ -72,6 +99,16 @@ export class Co2ChartComponent implements OnInit, OnDestroy {
   }
 
   private mostrarGrafico(consumos: any[]): void {
+    if (consumos.length === 0) {
+      this.noData = true;
+      if (this.chart) {
+        this.chart.destroy();
+        this.chart = null;
+      }
+      return;
+    }
+    
+    this.noData = false;
     const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
                    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     

@@ -123,7 +123,7 @@ export class MenuUsuarioComponent implements OnInit{
 
   cerrarSesion(){
     this.authService.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
 }

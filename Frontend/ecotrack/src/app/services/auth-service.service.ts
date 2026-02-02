@@ -40,7 +40,7 @@ export class AuthServiceService {
   }
 
   redirigirLogin(){
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
   

@@ -1,4 +1,14 @@
+/* Offset for fixed navbar */
+:host {
+  display: block;
+  padding-top: 100px;
+}
 
+@media (max-width: 991.98px) {
+  :host {
+    padding-top: 80px;
+  }
+}
 
 .nav-link{
     color: white;

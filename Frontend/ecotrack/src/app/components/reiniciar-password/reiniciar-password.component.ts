@@ -53,4 +53,10 @@ export class ReiniciarPasswordComponent implements OnInit{
 
   }
 
+  mostrarPassword(password: string){
+    const passwordInput = document.getElementById(password) as HTMLInputElement;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    const toggleIcon = document.getElementById('toggleIcon');
+  }
+
 }
