@@ -53,7 +53,7 @@ Este manual describe los pasos para instalar y configurar la aplicación **EcoTr
 
 ---
 
-## 3. Instalación con Docker (Recomendado)
+## 3. Instalación con Docker
 
 ### 3.1 Instalar Docker y Docker Compose
 

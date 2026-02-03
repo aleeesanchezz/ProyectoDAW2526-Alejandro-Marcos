@@ -1,0 +1,58 @@
+<body *ngIf="usuarioActual">
+  <app-navbar></app-navbar>
+
+  <div id="body">
+
+    <h2>Crear nota</h2>
+
+    <form (ngSubmit)="registrarNota()" #form="ngForm">
+
+      <div class="mb-3">
+        Titulo *
+        <input [(ngModel)]="titulo" type="text" class="form-control" placeholder="Titulo" id="titulo" name="titulo"
+          required #tit="ngModel">
+        <div style="color: red;" [hidden]="tit.valid || tit.untouched">
+          Este campo es obligatorio
+        </div>
+      </div>
+
+      <div class="mb-3">
+        Contenido *
+        <textarea [(ngModel)]="contenido" class="form-control" placeholder="Contenido" id="contenido" name="contenido"
+          required #cont="ngModel" rows="4"></textarea>
+        <div style="color: red;" [hidden]="cont.valid || cont.untouched">
+          Este campo es obligatorio
+        </div>
+      </div>
+
+      <div class="mb-3">
+        Fecha *
+        <input [(ngModel)]="fecha" type="date" class="form-control" placeholder="Fecha" id="fecha" name="fecha"
+          required #fec="ngModel">
+        <div style="color: red;" [hidden]="fec.valid || fec.untouched">
+          Este campo es obligatorio
+        </div>
+      </div>
+
+      <div class="mb-3">
+        Color *
+        <input [(ngModel)]="color" type="color" class="form-control" placeholder="Color" id="color" name="color"
+          required #col="ngModel">
+        <div style="color: red;" [hidden]="col.valid || col.untouched">
+          Este campo es obligatorio
+        </div>
+      </div>
+
+      <div class="botones">
+        <button type="submit" class="btn btn-success" id="registrarNota" [disabled]="form.invalid">Guardar</button>
+        <button type="button" class="btn btn-secondary" routerLink="/lista-notas">Cancelar</button>
+      </div>
+    </form>
+
+    <div *ngIf="mensaje" class="alert alert-success mt-3">
+      {{ mensaje }}
+    </div>
+
+  </div>
+
+</body>

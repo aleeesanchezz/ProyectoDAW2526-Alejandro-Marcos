@@ -1,0 +1,81 @@
+<body *ngIf="usuarioActual">
+  
+
+<app-navbar></app-navbar>
+
+
+<main id="body">
+  <h2>Historial de consumos</h2>
+    
+    <div *ngIf="noHayConsumos" id="alerta">
+        <span>¡Todavia no tienes consumos registrados!</span>
+        <button type="button" class="btn btn-success bi-plus-circle" id="añadirTarea" (click)="registrarConsumo()"></button>
+    </div>
+
+    <div *ngIf="!noHayConsumos" class="filtros">
+      <div id="buscador">
+         <input type="text" placeholder="Buscar" #termino id="buscar">
+        <button type="button" class="btn btn-success" (click)="buscar(termino)">Buscar</button>
+      </div>
+
+      <div class="nav-item dropdown" id="objetivos">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="font-size: 0.9rem;">
+          Ordenar
+        </a>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item" (click)="ordenarReciente()">Más reciente</button></li>
+          <li><button class="dropdown-item" (click)="ordenarAntiguo()">Más antiguo</button></li>
+        </ul>
+      </div>
+    </div>
+
+    
+    <table *ngIf="consumos.length >= 1" class="table">
+     
+    
+        <thead>
+            <tr>
+                <th scope="col">Categoria</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Unidad</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Notas</th>
+                <th scope="col">Co2 generado</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let consumo of consumos">
+                <td name="categoria">{{ consumo.categoria }}</td>
+                <td name="cantidad">{{ consumo.cantidad }}</td>
+                <td name="unidad">{{ consumo.unidad }}</td>
+                <td name="fecha">{{ consumo.fecha }}</td>
+                <td>
+                  <div *ngIf="consumo.notas" class="dropdown-center">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    </button>
+                    <article class="dropdown-menu">  
+                      <span name="notas">{{consumo.notas}}</span>
+                    </article>
+                  </div>      
+                </td>
+                <td style="color: rgb(87, 184, 87);" name="co2">{{ consumo.co2 }}</td>
+                <td><button type="button" class="btn btn-success btn-action" (click)="redirigirModificarConsumo(consumo)" title="Modificar">
+                  <i class="bi bi-pencil"></i>
+                </button></td>
+                <td><button class="btn btn-danger btn-action" (click)="mostrarModalEliminar(consumo.id)" title="Eliminar">
+                  <i class="bi bi-trash"></i>
+                </button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="modalEliminar" class="card-body" id="modal-eliminar">
+      <p class="card-text">¿Estás seguro de que quieres eliminar este consumo?</p>
+      <a class="btn btn-success" (click)="cerrarModal()">Cerrar</a>
+      <a class="btn btn-danger" (click)="eliminarConsumo()" style="margin-left: 1rem;">Eliminar</a>
+    </div>
+</main>
+</body>

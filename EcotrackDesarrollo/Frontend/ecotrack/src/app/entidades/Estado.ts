@@ -1,0 +1,5 @@
+export enum Estado{
+    EN_PROGRESO = 'EN_PROGRESO',
+    COMPLETADO = 'COMPLETADO',
+    FALLIDO = 'FALLIDO'
+}

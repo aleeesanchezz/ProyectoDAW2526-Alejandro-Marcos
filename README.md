@@ -1,3 +1,5 @@
+# Usar la versión de desarrollo
+
 # EcoTrack — Documentación del Proyecto
 
 **Autores:** Alejandro Sánchez Olivera, Marcos Blasco Serrano  
